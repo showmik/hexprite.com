@@ -229,19 +229,41 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-[#fdfdfd] dark:bg-darkBg border-t-2 border-brandDark dark:border-gray-800 py-8 mt-16 transition-colors">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-gray-600 dark:text-gray-500 font-mono text-xs md:text-sm text-center md:text-left">
-                Hexprite &copy; 2026. Designed for embedded engineers.
-            </div>
-            <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 font-mono text-xs md:text-sm">
-                <a href="#" class="text-gray-900 dark:text-gray-400 hover:text-brand dark:hover:text-brand transition-colors">Releases</a>
-                <a href="#" class="text-gray-900 dark:text-gray-400 hover:text-brand dark:hover:text-brand transition-colors">Issues</a>
-                <a href="terms.html" class="text-gray-900 dark:text-gray-400 hover:text-brand dark:hover:text-brand transition-colors">Terms of Service</a>
-                <a href="privacy.html" class="text-gray-900 dark:text-gray-400 hover:text-brand dark:hover:text-brand transition-colors">Privacy Policy</a>
-                <a href="refunds.html" class="text-gray-900 dark:text-gray-400 hover:text-brand dark:hover:text-brand transition-colors">Refund Policy</a>
-                <a href="code-of-conduct.html" class="text-gray-900 dark:text-gray-400 hover:text-brand dark:hover:text-brand transition-colors">Code of Conduct</a>
+        <!-- Footer -->
+    <footer class="bg-[#fdfdfd] dark:bg-darkBg border-t-2 border-brandDark dark:border-gray-800 py-12 mt-16 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+                <!-- Column 1: Branding & Copyright -->
+                <div class="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="assets/images/logo.png" alt="Hexprite" class="h-6 w-auto dark:hidden" />
+                        <img src="assets/images/logo_light.png" alt="Hexprite" class="h-6 w-auto hidden dark:block" />
+                        <span class="font-mono font-bold text-gray-900 dark:text-white">Hexprite</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-500 font-mono text-sm mb-2">Designed for embedded engineers.</p>
+                    <p class="text-gray-500 dark:text-gray-600 font-mono text-xs">&copy; 2026 Hexprite. All rights reserved.</p>
+                </div>
+
+                <!-- Column 2: Project Links -->
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="font-mono text-xs tracking-wider uppercase text-gray-400 dark:text-gray-600 mb-4 font-bold">Project</h3>
+                    <div class="flex flex-col gap-3 font-mono text-sm text-center md:text-left">
+                        <a href="https://github.com/showmik/hexprite/releases" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Releases</a>
+                        <a href="https://github.com/showmik/hexprite/issues" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Issues</a>
+                        <a href="https://github.com/showmik/hexprite" target="_blank" rel="noopener noreferrer" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Column 3: Legal Links -->
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="font-mono text-xs tracking-wider uppercase text-gray-400 dark:text-gray-600 mb-4 font-bold">Legal</h3>
+                    <div class="flex flex-col gap-3 font-mono text-sm text-center md:text-left">
+                        <a href="terms.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Terms of Service</a>
+                        <a href="privacy.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Privacy Policy</a>
+                        <a href="refunds.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Refund Policy</a>
+                        <a href="code-of-conduct.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Code of Conduct</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -330,6 +352,7 @@
     </script>
 </body>
 </html>
+
 
 
 
