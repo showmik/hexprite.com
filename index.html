@@ -208,7 +208,7 @@
 
     <!-- Hero & Product Wrapper for Interactive Grid -->
     <div class="relative overflow-hidden w-full">
-        <canvas id="hero-grid-canvas" class="absolute inset-0 w-full h-full -z-10"></canvas>
+        <canvas id="hero-grid-canvas" class="absolute inset-0 w-full h-full -z-10" style="mask-image: linear-gradient(to bottom, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);"></canvas>
         
         <!-- Hero Section -->
         <section class="pt-32 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center relative z-10">
@@ -732,7 +732,9 @@
             const ctx = canvas.getContext('2d');
             
             let width, height;
-            const gridSize = 40; // Size of the grid cells
+            // 33px grid size ensures that line 2 (33 * 2 = 66) perfectly matches 
+            // the navbar's 66px height (h-16 [64px] + border-b-2 [2px])
+            const gridSize = 33; 
             let mouseX = -1000;
             let mouseY = -1000;
             
