@@ -875,11 +875,13 @@
                         }
                         
                         if (opacity[idx] > 0) {
-                            // Map alpha appropriately based on theme
+                            // Map alpha appropriately based on theme using Hexprite brand colors
                             if (isDark) {
-                                ctx.fillStyle = `rgba(255, 255, 255, ${opacity[idx] * 0.15})`;
+                                // Brand Button Blue (#42CAFD)
+                                ctx.fillStyle = `rgba(66, 202, 253, ${opacity[idx] * 0.35})`;
                             } else {
-                                ctx.fillStyle = `rgba(0, 0, 0, ${opacity[idx] * 0.15})`;
+                                // Brand Blue (#1a8fe3)
+                                ctx.fillStyle = `rgba(26, 143, 227, ${opacity[idx] * 0.25})`;
                             }
                             // Draw blocky pixel cell (leaving 1px gap for grid aesthetic)
                             ctx.fillRect(x * gridSize, y * gridSize, gridSize - 1, gridSize - 1);
