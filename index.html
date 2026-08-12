@@ -521,6 +521,7 @@
     </section>
 
     <!-- Support Section -->
+    <!-- Support Section -->
     <section id="support" class="py-16 md:py-24 bg-brandDark text-white border-t-2 border-brandDark">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl md:text-3xl font-extrabold mb-6 md:mb-8 font-mono">> Support the Project</h2>
@@ -529,11 +530,23 @@
                 <p>
                     Hexprite was built to solve the friction of embedded graphics development by replacing fragmented tools and web converters with a unified native workflow.
                 </p>
-                <div class="bg-gray-800 border-2 border-brand p-4 text-left shadow-[4px_4px_0px_0px_rgba(26,143,227,0.3)]">
-                    <h3 class="text-white font-bold font-mono text-lg mb-2">🔓 Open Source Goal</h3>
-                    <p class="text-sm">
-                        As a solo developer, I am committed to keeping the core monochrome features entirely free. If this tool saves you time, consider a donation. <strong>If the project reaches $500 in donations, I will release the core Hexprite Monochrome edition as open-source software.</strong>
+                <div class="bg-[#1a1a24] border-2 border-brandDark dark:border-gray-800 shadow-[6px_6px_0px_0px_rgba(26,143,227,0.2)] text-left overflow-hidden mt-10 p-6 md:p-8">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xl">🔓</span>
+                        <h3 class="text-white font-bold font-mono text-lg md:text-xl">Open Source Goal: $500</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+                        As a solo developer, I am committed to keeping the core monochrome features entirely free. If this tool saves you time, consider a donation. <strong>Once we reach $500, I will release the Hexprite Monochrome edition as open-source software.</strong>
                     </p>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden mb-2">
+                        <div class="bg-brand h-full" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs font-mono text-gray-500 uppercase tracking-wider">
+                        <span>$0 Raised</span>
+                        <span>$500 Goal</span>
+                    </div>
                 </div>
             </div>
 
@@ -545,7 +558,7 @@
                     </svg>
                     Donate via Lemon Squeezy
                 </a>
-                <a href="#"
+                <a href="https://github.com/showmik/hexprite" target="_blank" rel="noopener noreferrer"
                     class="px-6 py-4 md:px-8 md:py-4 bg-gray-800 text-white font-mono font-bold text-base md:text-lg hover:bg-gray-700 border-2 border-gray-600 transition-all flex items-center justify-center gap-2">
                     ★ Star on GitHub
                 </a>
@@ -690,6 +703,7 @@
 </body>
 
 </html>
+
 
 
 
