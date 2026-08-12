@@ -878,10 +878,10 @@
                             // Map alpha appropriately based on theme using Hexprite brand colors
                             if (isDark) {
                                 // Brand Button Blue (#42CAFD)
-                                ctx.fillStyle = `rgba(66, 202, 253, ${opacity[idx] * 0.35})`;
+                                ctx.fillStyle = `rgba(66, 202, 253, ${opacity[idx] * 0.12})`;
                             } else {
                                 // Brand Blue (#1a8fe3)
-                                ctx.fillStyle = `rgba(26, 143, 227, ${opacity[idx] * 0.25})`;
+                                ctx.fillStyle = `rgba(26, 143, 227, ${opacity[idx] * 0.08})`;
                             }
                             // Draw blocky pixel cell (leaving 1px gap for grid aesthetic)
                             ctx.fillRect(x * gridSize, y * gridSize, gridSize - 1, gridSize - 1);
