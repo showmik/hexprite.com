@@ -908,29 +908,39 @@
     </script>
 
     <!-- Sticky Banner -->
-    <div id="sticky-banner" class="fixed bottom-0 inset-x-0 z-50 bg-brandDark text-white border-t-2 border-gray-800 shadow-xl transition-transform duration-300 transform translate-y-full flex flex-col sm:flex-row items-center justify-between px-4 py-3 sm:px-6">
-        <div class="flex items-center gap-4 w-full sm:w-auto mb-3 sm:mb-0">
-            <div class="font-mono text-sm sm:text-base font-bold flex-1">
-                <span class="text-brand">Help open-source Hexprite!</span>
-                <span class="opacity-80 block sm:inline sm:ml-2">($0 / $500 Raised)</span>
+    <div id="sticky-banner" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-3xl bg-[#1a1a24] text-white border-2 border-gray-700 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] transition-all duration-300 transform translate-y-32 opacity-0 flex flex-col sm:flex-row items-center justify-between p-3 sm:p-4 rounded-sm">
+        
+        <div class="flex items-center gap-3 w-full sm:w-auto mb-3 sm:mb-0">
+            <!-- Icon -->
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-brand/10 rounded-full border border-brand">
+                <svg class="w-5 h-5 text-brandRed" fill="currentColor" viewBox="0 0 11 11" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2,2 h2 v1 h-2 v-1 z M7,2 h2 v1 h-2 v-1 z M1,3 h9 v3 h-9 v-3 z M2,6 h7 v1 h-7 v-1 z M3,7 h5 v1 h-5 v-1 z M4,8 h3 v1 h-3 v-1 z M5,9 h1 v1 h-1 v-1 z"/>
+                </svg>
             </div>
+            
+            <div class="font-mono flex flex-col flex-1">
+                <span class="text-sm font-bold text-white">Help open-source Hexprite!</span>
+                <span class="text-xs text-gray-400 mt-0.5"><span class="text-brand">$0</span> / $500 Raised</span>
+            </div>
+            
             <!-- Mobile dismiss -->
-            <button class="dismiss-banner sm:hidden text-gray-400 hover:text-white p-1">
+            <button class="dismiss-banner sm:hidden text-gray-500 hover:text-white p-1 ml-auto">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
         
         <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-            <!-- Progress Bar -->
-            <div class="hidden sm:block w-32 md:w-48 bg-gray-800 h-2 rounded-full overflow-hidden border border-gray-700">
-                <div class="bg-brand h-full" style="width: 0%"></div>
+            <!-- Progress Bar (Subtle) -->
+            <div class="hidden md:block w-32 bg-gray-800 h-1.5 rounded-full overflow-hidden border border-gray-700">
+                <div class="bg-brand h-full transition-all" style="width: 5%"></div>
             </div>
             
-            <a href="#support" class="bg-brandButton text-gray-900 px-4 py-1.5 font-mono text-sm font-bold border-2 border-brandDark hover:bg-[#FFEA00] transition-colors whitespace-nowrap">
+            <a href="#support" class="bg-brandButton text-gray-900 px-5 py-2 font-mono text-sm font-bold border-2 border-brandDark hover:bg-[#FFEA00] hover:translate-x-[1px] hover:translate-y-[1px] transition-all whitespace-nowrap shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] hover:shadow-none">
                 ♥ Donate
             </a>
+            
             <!-- Desktop dismiss -->
-            <button class="dismiss-banner hidden sm:block text-gray-400 hover:text-white p-1">
+            <button class="dismiss-banner hidden sm:block text-gray-500 hover:text-brandRed transition-colors p-1">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -998,13 +1008,13 @@
             if (localStorage.getItem('hexprite-banner-dismissed') !== 'true') {
                 // Show banner after short delay
                 setTimeout(() => {
-                    banner.classList.remove('translate-y-full');
+                    banner.classList.remove('translate-y-32', 'opacity-0');
                 }, 1500);
             }
             
             dismissBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    banner.classList.add('translate-y-full');
+                    banner.classList.add('translate-y-32', 'opacity-0');
                     localStorage.setItem('hexprite-banner-dismissed', 'true');
                 });
             });
