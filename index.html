@@ -368,29 +368,9 @@
                 </div>
             </div>
 
-            <!-- Feature 5: Hardware Preview -->
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
-                <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Live OLED Simulation</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Hardware Display Simulation</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        On-screen simulation of monochrome OLEDs, LCDs, and e-paper displays (e.g., SSD1306, SH1106).
-                    </p>
-                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Simulation of OLED, LCD, and e-paper pixel structures.</li>
-                        <li><span class="text-brand mr-2">■</span> Pre-configured profiles for SSD1306, SH1106, and Flipper Zero.</li>
-                        <li><span class="text-brand mr-2">■</span> Inspect sub-pixel gaps and display tinting in real-time.</li>
-                    </ul>
-                </div>
-            </div>
 
-            <!-- Feature 6: Animation (Reversed layout) -->
-            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+            <!-- Feature 5: Animation (Row layout) -->
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div
                         class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
@@ -410,23 +390,44 @@
                 </div>
             </div>
 
-            <!-- Feature 7: Integrations & Import -->
+            <!-- Feature 6: Image & GIF Import (Reverse layout) -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: GIF Import & Dithering</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Image & GIF Import</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Import standard graphics and animated GIFs and convert them into perfectly dithered 1-bit monochrome art.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Import your existing images or GIFs and convert them beautifully to 1-bit.</li>
+                        <li><span class="text-brand mr-2">■</span> Find the perfect visual look using 6 different dithering algorithms including Floyd-Steinberg and Bayer.</li>
+                        <li><span class="text-brand mr-2">■</span> Adjust adaptive thresholding and gamma correction for precise contrast control.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 7: Flipper Zero Support (Row layout) -->
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div
                         class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Flipper Zero / GIF Import</span>
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Flipper Zero Assets</span>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Image Import & Flipper Zero</h3>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Native Flipper Zero Support</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        Native Flipper Zero (.bm / .xbm) support. Import images and animated GIFs with configurable dithering algorithms.
+                        First-class support for the Flipper Zero community. No external python scripts or web converters required.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Native read/write support for Flipper Zero .bm and .xbm formats.</li>
-                        <li><span class="text-brand mr-2">■</span> Import images or GIFs using 6+ dithering algorithms (Floyd-Steinberg, Bayer).</li>
-                        <li><span class="text-brand mr-2">■</span> Configurable adaptive thresholding and gamma correction.</li>
+                        <li><span class="text-brand mr-2">■</span> Native read and write support for Flipper Zero .bm (Icon) and .xbm formats.</li>
+                        <li><span class="text-brand mr-2">■</span> Edit community UI assets directly in the editor without tedious conversion steps.</li>
+                        <li><span class="text-brand mr-2">■</span> Export ready-to-use graphics for Flipper Zero firmware apps instantly.</li>
                     </ul>
                 </div>
             </div>
@@ -445,9 +446,9 @@
                         Optimized Windows desktop application offering fast startup, a multi-tab workflow, and offline operation.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Optimized Windows application built on .NET 9 and WPF.</li>
-                        <li><span class="text-brand mr-2">■</span> Multi-tab workflow supports editing multiple files simultaneously.</li>
-                        <li><span class="text-brand mr-2">■</span> Fully offline capable with fast startup and low RAM usage.</li>
+                        <li><span class="text-brand mr-2">■</span> A responsive, snappy desktop app that gets out of your way.</li>
+                        <li><span class="text-brand mr-2">■</span> Work efficiently with a multi-tab interface for editing several files at once.</li>
+                        <li><span class="text-brand mr-2">■</span> Always works entirely offline without requiring logins or cloud connections.</li>
                     </ul>
                 </div>
             </div>
