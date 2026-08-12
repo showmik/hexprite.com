@@ -186,7 +186,7 @@
         </div>
         <h1
             class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 text-gray-900 dark:text-white">
-            The professional pixel art editor for <span class="text-brand block sm:inline">embedded displays.</span>
+            The dedicated pixel art and font editor for <span class="text-brand block sm:inline">embedded displays.</span>
         </h1>
         <p
             class="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed max-w-3xl mx-auto px-2">
@@ -214,7 +214,7 @@
             <span class="hidden sm:inline">•</span>
             <span>No accounts</span>
             <span class="hidden sm:inline">•</span>
-            <span>No telemetry</span>
+            <span>Zero bloat</span>
         </div>
     </section>
 
@@ -284,139 +284,28 @@
                     Core Capabilities</h2>
             </div>
 
-            <!-- Feature 1: Canvas & Tools -->
+            <!-- Feature 1: Export & Import -->
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div
                         class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <!-- Replace with GIF -->
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">GIF: Drawing
-                            tools in action</span>
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Code Export</span>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">>
-                        Strict 1-Bit Editing</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        True 1-bit data representation ensuring zero ambiguity in hardware output. Includes layer management, advanced selections, and hardware-accelerated WPF rendering.
-                    </p>
-                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Layers with "Focus Toggle" for visual organization
-                            without breaking 1-bit data.</li>
-                        <li><span class="text-brand mr-2">■</span> Advanced selections: Marching ants & floating
-                            selections.</li>
-                        <li><span class="text-brand mr-2">■</span> Floating Paste Modes: Choose Transparent or Opaque
-                            stamping.</li>
-                        <li><span class="text-brand mr-2">■</span> Hardware-accelerated WPF rendering for zero lag.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Feature 2: Hardware Preview (Reversed layout) -->
-            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
-                <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <!-- Replace with Image -->
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot:
-                            Live OLED Simulation</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">>
-                        Hardware Display Simulation</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        On-screen simulation of monochrome OLEDs, LCDs, and e-paper displays (e.g., SSD1306, SH1106).
-                    </p>
-                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Strict data structures—no accidental greyscales or
-                            anti-aliasing artifacts.</li>
-                        <li><span class="text-brand mr-2">■</span> Accurate monochromatic display simulation.</li>
-                        <li><span class="text-brand mr-2">■</span> Smooth zoom/pan controls to inspect every single
-                            pixel.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Feature 3: Export & Import -->
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
-                <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <!-- Replace with Image -->
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot:
-                            Code Export</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">>
-                        Direct Source Code Sync</h3>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Direct Source Code Sync</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
                         Link directly to your project's code files. Automatically update embedded C-arrays while preserving existing file signatures and formatting.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Formats: Adafruit GFX, u8g2, Plain C, MicroPython,
-                            and more.</li>
-                        <li><span class="text-brand mr-2">■</span> Built-in Compression: Integrated RLE and LZSS with C decoders.</li>
-                        <li><span class="text-brand mr-2">■</span> Source File Linking: Updates your source files
-                            natively.</li>
+                        <li><span class="text-brand mr-2">■</span> Link natively to .c, .h, .cpp, and .py source files.</li>
+                        <li><span class="text-brand mr-2">■</span> Two-way sync: modify arrays on disk or load sprites from code.</li>
+                        <li><span class="text-brand mr-2">■</span> Built-in RLE and LZSS compression generation for minimal footprint.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Feature 4: Animation (Reversed layout) -->
-            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
-                <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <!-- Replace with Image -->
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot:
-                            Timeline Panel</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">>
-                        Sprite Animation</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        Create and preview multi-frame animations with timeline management and configurable framerates prior to compilation.
-                    </p>
-                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Intuitive Timeline Panel for frame management.</li>
-                        <li><span class="text-brand mr-2">■</span> Playback controls with adjustable framerates.</li>
-                        <li><span class="text-brand mr-2">■</span> Export directly as animated bytearrays or multiple C
-                            arrays.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Feature 5: Native Performance -->
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
-                <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <!-- Replace with Image -->
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot:
-                            Multi-Tab Interface</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">>
-                        Native Desktop Performance</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        Optimized Windows desktop application offering fast startup, a multi-tab workflow, and offline operation with zero telemetry.
-                    </p>
-                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Near-instant startup times and minimal RAM usage.
-                        </li>
-                        <li><span class="text-brand mr-2">■</span> Multi-tab workflow: Edit up to 10 files side-by-side.
-                        </li>
-                        <li><span class="text-brand mr-2">■</span> 100% Offline, zero telemetry, no forced accounts.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Feature 6: Embedded Typography Suite (Reversed layout) -->
+            <!-- Feature 2: Embedded Typography Suite (Reversed layout) -->
             <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div
@@ -430,14 +319,14 @@
                         Create custom bitmapped fonts. Import TTF/OTF, adjust kerning, and generate C code for Adafruit GFX, u8g2 BDF, and LVGL.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Exports to Adafruit GFX, u8g2 BDF, and LVGL formats.</li>
-                        <li><span class="text-brand mr-2">■</span> Live Flash memory footprint estimation.</li>
-                        <li><span class="text-brand mr-2">■</span> Pixel-perfect individual glyph editing with tight bounds cropping.</li>
+                        <li><span class="text-brand mr-2">■</span> Generate C code for Adafruit GFX, u8g2 BDF, and LVGL formats.</li>
+                        <li><span class="text-brand mr-2">■</span> Live Flash memory footprint estimation as you design.</li>
+                        <li><span class="text-brand mr-2">■</span> Pixel-perfect glyph editing with automatic bounding-box cropping.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Feature 7: Hardware Streaming -->
+            <!-- Feature 3: Hardware Streaming -->
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div
@@ -451,15 +340,78 @@
                         Stream canvas edits directly to physical microcontrollers over USB/Serial in real-time.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Asynchronous non-blocking pipeline for zero drawing lag.</li>
-                        <li><span class="text-brand mr-2">■</span> Supports max baud rates (115200+).</li>
-                        <li><span class="text-brand mr-2">■</span> Arduino bootloader auto-protection (DTR serial reset handling).</li>
+                        <li><span class="text-brand mr-2">■</span> Stream canvas edits directly to microcontrollers over USB/Serial.</li>
+                        <li><span class="text-brand mr-2">■</span> Asynchronous, zero-lag pipeline supporting baud rates over 115200.</li>
+                        <li><span class="text-brand mr-2">■</span> Built-in Arduino bootloader protection and auto-reset handling.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Feature 8: Integrations & Import (Reversed layout) -->
-            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
+            <!-- Feature 4: Canvas & Tools (Reversed layout) -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">GIF: Drawing tools in action</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Strict 1-Bit Editing</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        True 1-bit data representation ensuring zero ambiguity in hardware output. Includes layer management, advanced selections, and hardware-accelerated WPF rendering.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Native boolean array memory layout ensures pure 1-bit data.</li>
+                        <li><span class="text-brand mr-2">■</span> Hardware-accelerated WPF rendering pipeline.</li>
+                        <li><span class="text-brand mr-2">■</span> Non-destructive layer management and Focus Toggle for organization.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 5: Hardware Preview -->
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Live OLED Simulation</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Hardware Display Simulation</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        On-screen simulation of monochrome OLEDs, LCDs, and e-paper displays (e.g., SSD1306, SH1106).
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Simulation of OLED, LCD, and e-paper pixel structures.</li>
+                        <li><span class="text-brand mr-2">■</span> Pre-configured profiles for SSD1306, SH1106, and Flipper Zero.</li>
+                        <li><span class="text-brand mr-2">■</span> Inspect sub-pixel gaps and display tinting in real-time.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 6: Animation (Reversed layout) -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Timeline Panel</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Sprite Animation</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Create and preview multi-frame animations with timeline management and configurable framerates prior to compilation.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Multi-frame timeline management with configurable framerates.</li>
+                        <li><span class="text-brand mr-2">■</span> Live onion-skinning overlay for previous and next frames.</li>
+                        <li><span class="text-brand mr-2">■</span> Export as animated bytearrays, 2D C arrays, or sprite sheets.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 7: Integrations & Import -->
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div
                         class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
@@ -472,9 +424,30 @@
                         Native Flipper Zero (.bm / .xbm) support. Import images and animated GIFs with configurable dithering algorithms.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Native Flipper Zero (.bm / .xbm) read/write support.</li>
-                        <li><span class="text-brand mr-2">■</span> 6+ dithering algorithms (Floyd-Steinberg, Bayer, etc.).</li>
-                        <li><span class="text-brand mr-2">■</span> Adaptive thresholding and gamma correction.</li>
+                        <li><span class="text-brand mr-2">■</span> Native read/write support for Flipper Zero .bm and .xbm formats.</li>
+                        <li><span class="text-brand mr-2">■</span> Import images or GIFs using 6+ dithering algorithms (Floyd-Steinberg, Bayer).</li>
+                        <li><span class="text-brand mr-2">■</span> Configurable adaptive thresholding and gamma correction.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 8: Native Performance (Reversed layout) -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Multi-Tab Interface</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Native Desktop Performance</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Optimized Windows desktop application offering fast startup, a multi-tab workflow, and offline operation.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Optimized Windows application built on .NET 9 and WPF.</li>
+                        <li><span class="text-brand mr-2">■</span> Multi-tab workflow supports editing multiple files simultaneously.</li>
+                        <li><span class="text-brand mr-2">■</span> Fully offline capable with fast startup and low RAM usage.</li>
                     </ul>
                 </div>
             </div>
@@ -575,7 +548,7 @@
         <div
             class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-gray-600 dark:text-gray-500 font-mono text-xs md:text-sm text-center md:text-left">
-                Hexprite &copy; 2026. No trackers, no cookies.
+                Hexprite &copy; 2026. Designed for embedded engineers.
             </div>
             <div class="flex gap-6 font-mono text-xs md:text-sm">
                 <a href="#"
