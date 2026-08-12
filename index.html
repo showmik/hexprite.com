@@ -724,7 +724,7 @@
             .catch(error => console.error('Error fetching GitHub stars:', error));
     </script>
 
-    <!-- Interactive Hero Grid -->
+    <!-- Interactive Game of Life Background -->
     <script>
         (function() {
             const canvas = document.getElementById('hero-grid-canvas');
@@ -732,25 +732,24 @@
             const ctx = canvas.getContext('2d');
             
             let width, height;
-            // 33px grid size ensures that line 2 (33 * 2 = 66) perfectly matches 
-            // the navbar's 66px height (h-16 [64px] + border-b-2 [2px])
-            const gridSize = 33; 
+            const gridSize = 12; // Pixel art cell size
             
             let mouseX = -1000;
             let mouseY = -1000;
-            let targetMouseX = -1000;
-            let targetMouseY = -1000;
             
-            // Physics settings
-            const influenceRadius = 250; 
-            const repulsionForce = 45; // Max repulsion acceleration
-            const spring = 0.08; // How fast it snaps back (stiffness)
-            const friction = 0.82; // Damping/wobble
-            
-            let points = [];
             let cols, rows;
+            let grid = [];
+            let nextGrid = [];
+            let opacity = [];
+            let age = [];
             
-            // Setup canvas size
+            const maxAge = 150; // Ticks before a cell dies naturally (prevents infinite oscillators)
+            const fadeRate = 0.03; // How fast dead cells fade out visually
+            const spawnRadius = 2; // Brush size for painting
+
+            let lastUpdate = 0;
+            const updateInterval = 60; // Game of Life logic update interval in ms
+            
             function resize() {
                 const dpr = window.devicePixelRatio || 1;
                 const rect = canvas.parentElement.getBoundingClientRect();
@@ -764,114 +763,134 @@
                 canvas.style.width = width + 'px';
                 canvas.style.height = height + 'px';
                 
-                cols = Math.ceil(width / gridSize) + 1;
-                rows = Math.ceil(height / gridSize) + 1;
+                cols = Math.ceil(width / gridSize);
+                rows = Math.ceil(height / gridSize);
                 
-                // Initialize points mesh for physics simulation
-                points = [];
-                for (let i = 0; i <= cols; i++) {
-                    points[i] = [];
-                    for (let j = 0; j <= rows; j++) {
-                        points[i][j] = {
-                            baseX: i * gridSize,
-                            baseY: j * gridSize,
-                            x: i * gridSize,
-                            y: j * gridSize,
-                            vx: 0,
-                            vy: 0
-                        };
-                    }
-                }
+                // Initialize memory efficient typed arrays for 2D grid simulation
+                grid = new Uint8Array(cols * rows);
+                nextGrid = new Uint8Array(cols * rows);
+                opacity = new Float32Array(cols * rows);
+                age = new Uint16Array(cols * rows);
             }
 
             window.addEventListener('resize', resize);
             resize();
 
-            // Track mouse inside the hero section
+            function getIndex(x, y) {
+                return y * cols + x;
+            }
+
+            // Track mouse and paint "living" cells
             canvas.parentElement.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
-                targetMouseX = e.clientX - rect.left;
-                targetMouseY = e.clientY - rect.top;
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+                
+                const cx = Math.floor(mouseX / gridSize);
+                const cy = Math.floor(mouseY / gridSize);
+                
+                // Paint random noise in brush radius to allow GoL structures to spawn
+                for(let i = -spawnRadius; i <= spawnRadius; i++) {
+                    for(let j = -spawnRadius; j <= spawnRadius; j++) {
+                        // Sparse painting prevents immediate death from overpopulation
+                        if (Math.random() > 0.75) { 
+                            let nx = cx + i;
+                            let ny = cy + j;
+                            if (nx >= 0 && nx < cols && ny >= 0 && ny < rows) {
+                                let idx = getIndex(nx, ny);
+                                grid[idx] = 1;
+                                age[idx] = 0;
+                                opacity[idx] = 1.0;
+                            }
+                        }
+                    }
+                }
             });
 
-            canvas.parentElement.addEventListener('mouseleave', () => {
-                targetMouseX = -1000;
-                targetMouseY = -1000;
-            });
+            function countNeighbors(x, y) {
+                let sum = 0;
+                for (let i = -1; i <= 1; i++) {
+                    for (let j = -1; j <= 1; j++) {
+                        if (i === 0 && j === 0) continue;
+                        let nx = x + i;
+                        let ny = y + j;
+                        if (nx >= 0 && nx < cols && ny >= 0 && ny < rows) {
+                            sum += grid[getIndex(nx, ny)];
+                        }
+                    }
+                }
+                return sum;
+            }
 
-            function animate() {
+            function animate(timestamp) {
+                // 1. Run Conway's Game of Life logic at a fixed interval
+                if (timestamp - lastUpdate > updateInterval) {
+                    for (let x = 0; x < cols; x++) {
+                        for (let y = 0; y < rows; y++) {
+                            let idx = getIndex(x, y);
+                            let state = grid[idx];
+                            let neighbors = countNeighbors(x, y);
+                            
+                            // Conway rules
+                            if (state === 0 && neighbors === 3) {
+                                nextGrid[idx] = 1;
+                                age[idx] = 0;
+                            } else if (state === 1 && (neighbors < 2 || neighbors > 3)) {
+                                nextGrid[idx] = 0;
+                            } else {
+                                nextGrid[idx] = state;
+                            }
+                            
+                            // Imposed natural death limit
+                            if (nextGrid[idx] === 1) {
+                                age[idx]++;
+                                if (age[idx] > maxAge) {
+                                    nextGrid[idx] = 0;
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Swap buffers
+                    let temp = grid;
+                    grid = nextGrid;
+                    nextGrid = temp;
+                    
+                    lastUpdate = timestamp;
+                }
+                
+                // 2. Render Loop (Runs at monitor refresh rate for smooth fading)
                 ctx.clearRect(0, 0, width, height);
-                
-                // Smooth mouse movement for a more fluid interaction
-                mouseX += (targetMouseX - mouseX) * 0.15;
-                mouseY += (targetMouseY - mouseY) * 0.15;
-                
-                // Determine subtle gray color based on theme
                 const isDark = document.documentElement.classList.contains('dark');
-                ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
                 
-                // Update physics for each point
-                for (let i = 0; i <= cols; i++) {
-                    for (let j = 0; j <= rows; j++) {
-                        let p = points[i][j];
+                ctx.beginPath();
+                for (let x = 0; x < cols; x++) {
+                    for (let y = 0; y < rows; y++) {
+                        let idx = getIndex(x, y);
                         
-                        // Repel from mouse
-                        const dx = p.x - mouseX;
-                        const dy = p.y - mouseY;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (dist < influenceRadius) {
-                            const force = Math.pow((influenceRadius - dist) / influenceRadius, 2);
-                            const angle = Math.atan2(dy, dx);
-                            p.vx += Math.cos(angle) * force * repulsionForce * 0.1;
-                            p.vy += Math.sin(angle) * force * repulsionForce * 0.1;
+                        if (grid[idx] === 1) {
+                            opacity[idx] = 1.0;
+                        } else {
+                            opacity[idx] = Math.max(0, opacity[idx] - fadeRate);
                         }
                         
-                        // Spring back to base position
-                        p.vx += (p.baseX - p.x) * spring;
-                        p.vy += (p.baseY - p.y) * spring;
-                        
-                        // Apply friction and integrate
-                        p.vx *= friction;
-                        p.vy *= friction;
-                        p.x += p.vx;
-                        p.y += p.vy;
+                        if (opacity[idx] > 0) {
+                            // Map alpha appropriately based on theme
+                            if (isDark) {
+                                ctx.fillStyle = `rgba(255, 255, 255, ${opacity[idx] * 0.15})`;
+                            } else {
+                                ctx.fillStyle = `rgba(0, 0, 0, ${opacity[idx] * 0.15})`;
+                            }
+                            // Draw blocky pixel cell (leaving 1px gap for grid aesthetic)
+                            ctx.fillRect(x * gridSize, y * gridSize, gridSize - 1, gridSize - 1);
+                        }
                     }
                 }
                 
-                // Draw vertical lines with perfectly smooth curves
-                for (let i = 0; i <= cols; i++) {
-                    ctx.moveTo(points[i][0].x, points[i][0].y);
-                    for (let j = 0; j < rows; j++) {
-                        let p = points[i][j];
-                        let nextP = points[i][j+1];
-                        let xc = (p.x + nextP.x) / 2;
-                        let yc = (p.y + nextP.y) / 2;
-                        ctx.quadraticCurveTo(p.x, p.y, xc, yc);
-                    }
-                    ctx.lineTo(points[i][rows].x, points[i][rows].y);
-                }
-                
-                // Draw horizontal lines with perfectly smooth curves
-                for (let j = 0; j <= rows; j++) {
-                    ctx.moveTo(points[0][j].x, points[0][j].y);
-                    for (let i = 0; i < cols; i++) {
-                        let p = points[i][j];
-                        let nextP = points[i+1][j];
-                        let xc = (p.x + nextP.x) / 2;
-                        let yc = (p.y + nextP.y) / 2;
-                        ctx.quadraticCurveTo(p.x, p.y, xc, yc);
-                    }
-                    ctx.lineTo(points[cols][j].x, points[cols][j].y);
-                }
-                
-                ctx.stroke();
                 requestAnimationFrame(animate);
             }
             
-            animate();
+            requestAnimationFrame(animate);
         })();
     </script>
 </body>
