@@ -102,7 +102,7 @@
                     <img src="assets/images/logo.png" alt="Hexprite" class="h-7 md:h-8 w-auto dark:hidden" />
                     <img src="assets/images/logo_light.png" alt="Hexprite" class="h-7 md:h-8 w-auto hidden dark:block" />
                     <span
-                        class="px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.8.0</span>
+                        class="px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.9.0</span>
                 </div>
 
                 <!-- Desktop Menu -->
@@ -191,7 +191,7 @@
         <p
             class="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed max-w-3xl mx-auto px-2">
             Stop juggling MS Paint, sketchy web converters, and your IDE. Hexprite offers true 1-bit monochrome editing,
-            intelligent layer workflows, and direct C-array code linking—all inside a fast, native Windows app.
+            custom bitmapped fonts, live hardware streaming, and direct C-array code linking—all inside a fast, native Windows app.
         </p>
 
         <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8 px-4">
@@ -361,10 +361,9 @@
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
                         <li><span class="text-brand mr-2">■</span> Formats: Adafruit GFX, u8g2, Plain C, MicroPython,
                             and more.</li>
+                        <li><span class="text-brand mr-2">■</span> Built-in Compression: Integrated RLE and LZSS with C decoders.</li>
                         <li><span class="text-brand mr-2">■</span> Source File Linking: Updates your source files
                             natively.</li>
-                        <li><span class="text-brand mr-2">■</span> Two-Way Sync: Import sprites directly from C code.
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -396,7 +395,7 @@
             </div>
 
             <!-- Feature 5: Native Performance -->
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div
                         class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
@@ -419,6 +418,69 @@
                         </li>
                         <li><span class="text-brand mr-2">■</span> 100% Offline, zero telemetry, no forced accounts.
                         </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 6: Embedded Typography Suite (Reversed layout) -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Font Engine & Flash Estimator</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Embedded Typography Suite</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Design custom bitmapped fonts directly for microcontrollers. Import TTF/OTF, adjust kerning, and export ready-to-use C code.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Exports to Adafruit GFX, u8g2 BDF, and LVGL formats.</li>
+                        <li><span class="text-brand mr-2">■</span> Live Flash memory footprint estimation.</li>
+                        <li><span class="text-brand mr-2">■</span> Pixel-perfect individual glyph editing with tight bounds cropping.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 7: Hardware Streaming -->
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">GIF: Live Serial / COM Streaming</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Live Hardware Streaming</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Stream canvas edits in real-time to physical microcontroller hardware connected over USB or Serial.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Asynchronous non-blocking pipeline for zero drawing lag.</li>
+                        <li><span class="text-brand mr-2">■</span> Supports max baud rates (115200+).</li>
+                        <li><span class="text-brand mr-2">■</span> Arduino bootloader auto-protection (DTR serial reset handling).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 8: Integrations & Import (Reversed layout) -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
+                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Flipper Zero / GIF Import</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Flipper Zero & Image Import</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Native integration with community standards. Import images or animated GIFs and convert them beautifully to 1-bit monochrome.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Native Flipper Zero (.bm / .xbm) read/write support.</li>
+                        <li><span class="text-brand mr-2">■</span> 6+ dithering algorithms (Floyd-Steinberg, Bayer, etc.).</li>
+                        <li><span class="text-brand mr-2">■</span> Adaptive thresholding and gamma correction.</li>
                     </ul>
                 </div>
             </div>
@@ -446,8 +508,8 @@
                 <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">Monochrome Mode</h3>
                 <div class="font-mono text-2xl md:text-3xl font-extrabold text-brand mb-6">FREE</div>
                 <ul class="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 dark:text-gray-400 flex-grow">
-                    <li class="flex gap-2"><span class="text-gray-900 dark:text-brand font-bold">✓</span> Full drawing &
-                        selection tools</li>
+                    <li class="flex gap-2"><span class="text-gray-900 dark:text-brand font-bold">✓</span> Drawing, fonts, &
+                        animation</li>
                     <li class="flex gap-2"><span class="text-gray-900 dark:text-brand font-bold">✓</span> 7 Export
                         Formats (C Arrays, Hex, etc.)</li>
                     <li class="flex gap-2"><span class="text-gray-900 dark:text-brand font-bold">✓</span> Live OLED/LCD
@@ -463,16 +525,14 @@
                 <div
                     class="inline-block bg-brandRed text-white font-mono text-[10px] md:text-xs font-bold px-2 py-1 mb-4 w-max">
                     IN DEVELOPMENT</div>
-                <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">RGB565 & Animation</h3>
+                <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">RGB565 Mode</h3>
                 <div class="font-mono text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6">One-Time
                     Fee</div>
                 <ul class="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 dark:text-gray-400 flex-grow">
                     <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span><strong>TFT/Color Support:</strong> ST7735, ILI9341, etc.</span></li>
+                        <span><strong>TFT/Color Support:</strong> ST7735, ILI9341, GC9A01, etc.</span></li>
                     <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span><strong>Animation Tools:</strong> Timelines and frame management.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span><strong>Transformations:</strong> Scale, rotate, flip.</span></li>
+                        <span><strong>24-bit/32-bit Color:</strong> Evolving beyond 1-bit limits.</span></li>
                     <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span> <span>Funds
                             the continued development of the free version!</span></li>
                 </ul>
@@ -496,7 +556,7 @@
                     project is a labor of love. The monochrome tools will always be free.
                 </p>
                 <p>
-                    If Hexprite saves you half an hour of manual hex-encoding, consider buying me a coffee. It genuinely
+                    If Hexprite saves you half an hour of manual hex-encoding, consider supporting the project via a donation. It genuinely
                     keeps the lights on and the updates coming.
                 </p>
             </div>
@@ -504,11 +564,10 @@
             <div class="mt-10 md:mt-12 flex flex-col sm:flex-row justify-center gap-4 md:gap-6 px-4">
                 <a href="#"
                     class="px-6 py-4 md:px-8 md:py-4 bg-[#FFDD00] text-gray-900 font-mono font-bold text-base md:text-lg hover:bg-[#FFEA00] border-2 border-gray-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                     </svg>
-                    Buy me a coffee
+                    Donate via Lemon Squeezy
                 </a>
                 <a href="#"
                     class="px-6 py-4 md:px-8 md:py-4 bg-gray-800 text-white font-mono font-bold text-base md:text-lg hover:bg-gray-700 border-2 border-gray-600 transition-all flex items-center justify-center gap-2">
