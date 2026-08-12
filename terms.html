@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - Hexprite</title>
+
+    <!-- Tailwind Configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,14 +13,25 @@
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#1a1a24',
-                        brand: '#1a8fe3',
+                        darkBg: '#1a1a24', // Adjusted to harmonize with dark logo text
+                        darkPanel: '#22212c',
+                        brand: '#1a8fe3', // Logo Blue
+                        brandButton: '#42CAFD', // Button Blue
+                        brandRed: '#FF595A', // Logo Red
                         brandDark: '#22212C'
+                    },
+                    boxShadow: {
+                        'indie-light': '6px 6px 0px 0px rgba(34, 33, 44, 1)',
+                        'indie-dark': '6px 6px 0px 0px rgba(58, 165, 247, 0.3)',
+                        'indie-hover-light': '3px 3px 0px 0px rgba(34, 33, 44, 1)',
+                        'indie-hover-dark': '3px 3px 0px 0px rgba(58, 165, 247, 0.3)'
                     }
                 }
             }
         }
     </script>
+
+    <!-- Theme Initialization Script -->
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -26,11 +39,53 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4, .font-mono { font-family: 'JetBrains Mono', monospace; }
-        ::selection { background-color: #1a8fe3; color: white; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        ::selection {
+            background-color: #1a8fe3;
+            color: white;
+        }
+
+        /* Grid background pattern for image placeholders */
+        .bg-grid-pattern {
+            background-size: 20px 20px;
+            background-image:
+                linear-gradient(to right, rgba(128, 128, 128, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
+        }
+
+        @keyframes pop-jump {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            40% {
+                transform: translateY(-5px) scale(1.02);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .animate-pop-jump {
+            animation: pop-jump 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            will-change: transform;
+        }
     </style>
 </head>
 <body class="antialiased bg-[#fdfdfd] text-gray-900 dark:bg-darkBg dark:text-gray-300 transition-colors duration-200">
@@ -270,6 +325,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
