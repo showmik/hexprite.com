@@ -735,12 +735,20 @@
             // 33px grid size ensures that line 2 (33 * 2 = 66) perfectly matches 
             // the navbar's 66px height (h-16 [64px] + border-b-2 [2px])
             const gridSize = 33; 
+            
             let mouseX = -1000;
             let mouseY = -1000;
+            let targetMouseX = -1000;
+            let targetMouseY = -1000;
             
-            // Interaction settings
-            const influenceRadius = 250; // How far the mouse affects the grid
-            const maxDisplacement = 25; // Maximum push distance
+            // Physics settings
+            const influenceRadius = 250; 
+            const repulsionForce = 45; // Max repulsion acceleration
+            const spring = 0.08; // How fast it snaps back (stiffness)
+            const friction = 0.82; // Damping/wobble
+            
+            let points = [];
+            let cols, rows;
             
             // Setup canvas size
             function resize() {
@@ -755,6 +763,25 @@
                 
                 canvas.style.width = width + 'px';
                 canvas.style.height = height + 'px';
+                
+                cols = Math.ceil(width / gridSize) + 1;
+                rows = Math.ceil(height / gridSize) + 1;
+                
+                // Initialize points mesh for physics simulation
+                points = [];
+                for (let i = 0; i <= cols; i++) {
+                    points[i] = [];
+                    for (let j = 0; j <= rows; j++) {
+                        points[i][j] = {
+                            baseX: i * gridSize,
+                            baseY: j * gridSize,
+                            x: i * gridSize,
+                            y: j * gridSize,
+                            vx: 0,
+                            vy: 0
+                        };
+                    }
+                }
             }
 
             window.addEventListener('resize', resize);
@@ -763,37 +790,21 @@
             // Track mouse inside the hero section
             canvas.parentElement.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
-                mouseX = e.clientX - rect.left;
-                mouseY = e.clientY - rect.top;
+                targetMouseX = e.clientX - rect.left;
+                targetMouseY = e.clientY - rect.top;
             });
 
             canvas.parentElement.addEventListener('mouseleave', () => {
-                mouseX = -1000;
-                mouseY = -1000;
+                targetMouseX = -1000;
+                targetMouseY = -1000;
             });
-
-            // Smoothly interpolate points based on mouse distance
-            function getDisplacedPoint(x, y) {
-                const dx = x - mouseX;
-                const dy = y - mouseY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < influenceRadius) {
-                    // Normalize distance (0 at center, 1 at edge of radius)
-                    // We use an easing curve so it feels like a magnetic field/water ripple
-                    const force = Math.pow((influenceRadius - dist) / influenceRadius, 2);
-                    const angle = Math.atan2(dy, dx);
-                    
-                    return {
-                        x: x + Math.cos(angle) * force * maxDisplacement,
-                        y: y + Math.sin(angle) * force * maxDisplacement
-                    };
-                }
-                return { x, y };
-            }
 
             function animate() {
                 ctx.clearRect(0, 0, width, height);
+                
+                // Smooth mouse movement for a more fluid interaction
+                mouseX += (targetMouseX - mouseX) * 0.15;
+                mouseY += (targetMouseY - mouseY) * 0.15;
                 
                 // Determine subtle gray color based on theme
                 const isDark = document.documentElement.classList.contains('dark');
@@ -801,36 +812,59 @@
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 
-                const cols = Math.ceil(width / gridSize) + 1;
-                const rows = Math.ceil(height / gridSize) + 1;
-                
-                // Draw vertical warp lines
+                // Update physics for each point
                 for (let i = 0; i <= cols; i++) {
-                    const baseX = i * gridSize;
-                    let prevP = getDisplacedPoint(baseX, 0);
-                    ctx.moveTo(prevP.x, prevP.y);
-                    
-                    // Add segments to allow the line to curve smoothly
-                    const segments = rows * 2; 
-                    for (let j = 1; j <= segments; j++) {
-                        const baseY = (j / 2) * gridSize;
-                        const p = getDisplacedPoint(baseX, baseY);
-                        ctx.lineTo(p.x, p.y);
+                    for (let j = 0; j <= rows; j++) {
+                        let p = points[i][j];
+                        
+                        // Repel from mouse
+                        const dx = p.x - mouseX;
+                        const dy = p.y - mouseY;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < influenceRadius) {
+                            const force = Math.pow((influenceRadius - dist) / influenceRadius, 2);
+                            const angle = Math.atan2(dy, dx);
+                            p.vx += Math.cos(angle) * force * repulsionForce * 0.1;
+                            p.vy += Math.sin(angle) * force * repulsionForce * 0.1;
+                        }
+                        
+                        // Spring back to base position
+                        p.vx += (p.baseX - p.x) * spring;
+                        p.vy += (p.baseY - p.y) * spring;
+                        
+                        // Apply friction and integrate
+                        p.vx *= friction;
+                        p.vy *= friction;
+                        p.x += p.vx;
+                        p.y += p.vy;
                     }
                 }
                 
-                // Draw horizontal warp lines
-                for (let j = 0; j <= rows; j++) {
-                    const baseY = j * gridSize;
-                    let prevP = getDisplacedPoint(0, baseY);
-                    ctx.moveTo(prevP.x, prevP.y);
-                    
-                    const segments = cols * 2;
-                    for (let i = 1; i <= segments; i++) {
-                        const baseX = (i / 2) * gridSize;
-                        const p = getDisplacedPoint(baseX, baseY);
-                        ctx.lineTo(p.x, p.y);
+                // Draw vertical lines with perfectly smooth curves
+                for (let i = 0; i <= cols; i++) {
+                    ctx.moveTo(points[i][0].x, points[i][0].y);
+                    for (let j = 0; j < rows; j++) {
+                        let p = points[i][j];
+                        let nextP = points[i][j+1];
+                        let xc = (p.x + nextP.x) / 2;
+                        let yc = (p.y + nextP.y) / 2;
+                        ctx.quadraticCurveTo(p.x, p.y, xc, yc);
                     }
+                    ctx.lineTo(points[i][rows].x, points[i][rows].y);
+                }
+                
+                // Draw horizontal lines with perfectly smooth curves
+                for (let j = 0; j <= rows; j++) {
+                    ctx.moveTo(points[0][j].x, points[0][j].y);
+                    for (let i = 0; i < cols; i++) {
+                        let p = points[i][j];
+                        let nextP = points[i+1][j];
+                        let xc = (p.x + nextP.x) / 2;
+                        let yc = (p.y + nextP.y) / 2;
+                        ctx.quadraticCurveTo(p.x, p.y, xc, yc);
+                    }
+                    ctx.lineTo(points[cols][j].x, points[cols][j].y);
                 }
                 
                 ctx.stroke();
