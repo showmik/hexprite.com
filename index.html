@@ -248,13 +248,39 @@
                     Core Capabilities</h2>
             </div>
 
-            <!-- Feature 1: Export & Import -->
+            <!-- Feature 1: Precision Drawing Tools -->
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
-                    <div id="video-trigger-1"
-                        class="aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                    <div data-video="feature_01.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                        <video src="assets/videos/feature_01.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
+                                 <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Precision Drawing Tools</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Everything you need to design pixel-perfect monochrome graphics without the bloat.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Essential tools: Pencil, line, rectangle, ellipse, and flood fill.</li>
+                        <li><span class="text-brand mr-2">■</span> Advanced selection, move, and precise transformation controls.</li>
+                        <li><span class="text-brand mr-2">■</span> Clean, distraction-free interface focused on pixel manipulation.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 2: Direct Source Code Sync -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+                <div class="w-full md:w-1/2">
+                    <div data-video="feature_02.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
                         <!-- Using video with #t=0.001 to force the browser to render the first frame as a static poster -->
-                        <video src="assets/videos/feature01_file_sync.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <video src="assets/videos/feature_02.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
                         
                         <!-- Play Button Overlay -->
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -277,12 +303,17 @@
                 </div>
             </div>
 
-            <!-- Feature 2: Embedded Typography Suite (Reversed layout) -->
-            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+            <!-- Feature 3: Embedded Typography -->
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Font Engine & Flash Estimator</span>
+                    <div data-video="feature_03.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                        <video src="assets/videos/feature_03.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
+                                 <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">
@@ -298,12 +329,17 @@
                 </div>
             </div>
 
-            <!-- Feature 3: Hardware Streaming -->
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
+            <!-- Feature 4: Live Hardware Streaming -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">GIF: Live Serial / COM Streaming</span>
+                    <div data-video="feature_04.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                        <video src="assets/videos/feature_04.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
+                                 <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">
@@ -319,13 +355,17 @@
                 </div>
             </div>
 
-
-            <!-- Feature 5: Animation (Reversed layout) -->
-            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+            <!-- Feature 5: Sprite Animation -->
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Timeline Panel</span>
+                    <div data-video="feature_05.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                        <video src="assets/videos/feature_05.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
+                                 <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">
@@ -341,33 +381,69 @@
                 </div>
             </div>
 
-            <!-- Feature 6: Image & GIF Import (Row layout) -->
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
+            <!-- Feature 6: Advanced Dithering -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: GIF Import & Dithering</span>
+                    <div data-video="feature_06.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                        <video src="assets/videos/feature_06.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
+                                 <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Image & GIF Import</h3>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Advanced Dithering</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        Import standard graphics and animated GIFs and convert them into perfectly dithered 1-bit monochrome art.
+                        Import standard graphics and perfectly convert them to 1-bit monochrome art using multiple dithering techniques.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Import your existing images or GIFs and convert them beautifully to 1-bit.</li>
-                        <li><span class="text-brand mr-2">■</span> Find the perfect visual look using 6 different dithering algorithms including Floyd-Steinberg and Bayer.</li>
-                        <li><span class="text-brand mr-2">■</span> Adjust adaptive thresholding and gamma correction for precise contrast control.</li>
+                        <li><span class="text-brand mr-2">■</span> 6+ built-in algorithms including Floyd-Steinberg, Bayer, and Atkinson.</li>
+                        <li><span class="text-brand mr-2">■</span> Adjustable adaptive thresholding and gamma correction.</li>
+                        <li><span class="text-brand mr-2">■</span> Real-time preview of dithering results before applying.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Feature 7: Flipper Zero Support (Reversed layout) -->
-            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
+            <!-- Feature 7: Built-in Compression -->
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Flipper Zero Assets</span>
+                    <div data-video="feature_07.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                        <video src="assets/videos/feature_07.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
+                                 <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Built-in Compression</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
+                        Maximize your microcontroller's limited flash memory by leveraging native compression algorithms during export.
+                    </p>
+                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <li><span class="text-brand mr-2">■</span> Native support for RLE (Run-Length Encoding) and LZSS.</li>
+                        <li><span class="text-brand mr-2">■</span> Live flash footprint estimation as you draw.</li>
+                        <li><span class="text-brand mr-2">■</span> Automatically generate the C decoder functions for your project.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 8: Native Flipper Zero Support -->
+            <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
+                <div class="w-full md:w-1/2">
+                    <div data-video="feature_08.webm"
+                        class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
+                        <video src="assets/videos/feature_08.webm#t=0.001" preload="metadata" muted playsinline class="w-full h-full object-cover transition-opacity group-hover:opacity-80"></video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                             <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
+                                 <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">
@@ -379,27 +455,6 @@
                         <li><span class="text-brand mr-2">■</span> Native read and write support for Flipper Zero .bm (Icon) and .xbm formats.</li>
                         <li><span class="text-brand mr-2">■</span> Edit community UI assets directly in the editor without tedious conversion steps.</li>
                         <li><span class="text-brand mr-2">■</span> Export ready-to-use graphics for Flipper Zero firmware apps instantly.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Feature 8: Native Performance (Row layout) -->
-            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-                <div class="w-full md:w-1/2">
-                    <div
-                        class="aspect-video bg-white dark:bg-darkPanel border-4 border-gray-900 flex items-center justify-center p-4 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none bg-grid-pattern relative">
-                        <span class="font-mono text-gray-500 text-xs md:text-sm absolute px-4 text-center">Screenshot: Multi-Tab Interface</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Native Desktop Performance</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        Optimized Windows desktop application offering fast startup, a multi-tab workflow, and offline operation.
-                    </p>
-                    <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> A responsive, snappy desktop app that gets out of your way.</li>
-                        <li><span class="text-brand mr-2">■</span> Work efficiently with a multi-tab interface for editing several files at once.</li>
-                        <li><span class="text-brand mr-2">■</span> Always works entirely offline without requiring logins or cloud connections.</li>
                     </ul>
                 </div>
             </div>
@@ -977,7 +1032,7 @@
                 </button>
 
                 <!-- Video Player -->
-                <video id="modal-video-player" data-src="assets/videos/feature01_file_sync.webm" preload="none" loop muted playsinline class="w-full h-full object-cover"></video>
+                <video id="modal-video-player" preload="none" loop muted playsinline class="w-full h-full object-cover"></video>
             </div>
         </div>
     </div>
@@ -1065,11 +1120,14 @@
             const videoModal = document.getElementById('video-modal');
             const videoModalContent = document.getElementById('video-modal-content');
             const videoPlayer = document.getElementById('modal-video-player');
-            const videoTrigger = document.getElementById('video-trigger-1');
+            const videoTriggers = document.querySelectorAll('.feature-video-trigger');
             const videoCloseBtns = document.querySelectorAll('.video-modal-close');
 
             function openVideoModal(e) {
                 if (e) e.preventDefault();
+                
+                const triggerElement = e.currentTarget;
+                const videoFile = triggerElement.getAttribute('data-video');
                 videoModal.classList.remove('hidden');
                 // Force reflow
                 void videoModal.offsetWidth;
@@ -1077,9 +1135,11 @@
                 videoModalContent.classList.remove('scale-95');
                 videoModalContent.classList.add('scale-100');
                 
-                // Lazy load the video source on first click
-                if (!videoPlayer.getAttribute('src')) {
-                    videoPlayer.setAttribute('src', videoPlayer.getAttribute('data-src'));
+                // Update the video source if it's different from the clicked one
+                const fullVideoPath = `assets/videos/${videoFile}`;
+                if (videoPlayer.getAttribute('src') !== fullVideoPath) {
+                    videoPlayer.setAttribute('src', fullVideoPath);
+                    videoPlayer.load(); // Force reload when source changes
                 }
                 
                 // Reset and play video
@@ -1109,9 +1169,9 @@
                 }, 200);
             }
 
-            if (videoTrigger) {
-                videoTrigger.addEventListener('click', openVideoModal);
-            }
+            videoTriggers.forEach(trigger => {
+                trigger.addEventListener('click', openVideoModal);
+            });
 
             videoCloseBtns.forEach(btn => {
                 btn.addEventListener('click', closeVideoModal);
