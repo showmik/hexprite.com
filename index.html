@@ -71,7 +71,7 @@
 
     <!-- Navigation -->
     <nav id="main-nav"
-        class="fixed w-full z-50 top-0 bg-[#fdfdfd]/95 dark:bg-darkBg/95 backdrop-blur-sm border-b-2 border-gray-900 dark:border-gray-800 transition-colors duration-200">
+        class="fixed w-full z-50 top-0 bg-[#fdfdfd]/95 dark:bg-darkBg/95 backdrop-blur-sm border-b-2 border-gray-900 dark:border-gray-800 transition duration-300 ease-in-out">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                                 <!-- Logo -->
@@ -1024,7 +1024,10 @@
                     modalContent.classList.add('scale-100');
                 }, 10);
                 document.body.style.paddingRight = `${scrollbarWidth}px`;
-                if (mainNav) mainNav.style.paddingRight = `${scrollbarWidth}px`;
+                if (mainNav) {
+                    mainNav.style.paddingRight = `${scrollbarWidth}px`;
+                    mainNav.classList.add('-translate-y-full', 'opacity-0');
+                }
                 document.body.style.overflow = 'hidden'; // Prevent scrolling
             }
             
@@ -1033,6 +1036,7 @@
                 modal.classList.add('opacity-0');
                 modalContent.classList.remove('scale-100');
                 modalContent.classList.add('scale-95');
+                if (mainNav) mainNav.classList.remove('-translate-y-full', 'opacity-0');
                 
                 setTimeout(() => {
                     modal.classList.add('hidden');
@@ -1082,7 +1086,10 @@
                 videoPlayer.currentTime = 0;
                 videoPlayer.play();
                 document.body.style.paddingRight = `${scrollbarWidth}px`;
-                if (mainNav) mainNav.style.paddingRight = `${scrollbarWidth}px`;
+                if (mainNav) {
+                    mainNav.style.paddingRight = `${scrollbarWidth}px`;
+                    mainNav.classList.add('-translate-y-full', 'opacity-0');
+                }
                 document.body.style.overflow = 'hidden';
             }
 
@@ -1092,6 +1099,7 @@
                 videoModalContent.classList.remove('scale-100');
                 videoModalContent.classList.add('scale-95');
                 videoPlayer.pause();
+                if (mainNav) mainNav.classList.remove('-translate-y-full', 'opacity-0');
                 
                 setTimeout(() => {
                     videoModal.classList.add('hidden');
