@@ -960,21 +960,23 @@
     </div>
 
     <!-- Video Modal -->
-    <div id="video-modal" class="fixed inset-0 z-[70] flex items-center justify-center hidden opacity-0 transition-opacity duration-200">
+    <div id="video-modal" class="fixed inset-0 z-[70] flex items-center justify-center hidden opacity-0 transition-opacity duration-200 p-4 sm:p-8">
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-gray-900/90 backdrop-blur-md video-modal-close cursor-pointer"></div>
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-lg video-modal-close cursor-pointer"></div>
         
         <!-- Modal Content -->
-        <div class="relative z-10 w-full max-w-5xl mx-4 transform scale-95 transition-transform duration-200" id="video-modal-content">
-            <!-- Close Button -->
-            <button class="video-modal-close absolute -top-12 right-0 text-gray-400 hover:text-white transition-colors p-2">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
+        <div class="relative z-10 w-full max-w-6xl transform scale-95 transition-transform duration-200" id="video-modal-content">
             
-            <!-- Video Player (Muted, Auto-playing, Looping) -->
-            <div class="bg-black border-4 border-gray-900 shadow-2xl rounded-lg overflow-hidden aspect-video">
+            <!-- Video Container -->
+            <div class="relative bg-black border-2 border-gray-800 shadow-2xl rounded-lg overflow-hidden aspect-video">
+                <!-- Close Button (Minimal, top right inside video) -->
+                <button class="video-modal-close absolute top-4 right-4 z-20 text-white/50 hover:text-white transition-colors p-1 group">
+                    <svg class="w-8 h-8 drop-shadow-lg transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Video Player -->
                 <video id="modal-video-player" src="assets/videos/feature01_file_sync.webm" autoplay loop muted playsinline class="w-full h-full"></video>
             </div>
         </div>
