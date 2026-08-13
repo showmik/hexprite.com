@@ -70,7 +70,7 @@
 <body class="antialiased bg-[#fdfdfd] text-gray-900 dark:bg-darkBg dark:text-gray-300 transition-colors duration-200">
 
     <!-- Navigation -->
-    <nav
+    <nav id="main-nav"
         class="fixed w-full z-50 top-0 bg-[#fdfdfd]/95 dark:bg-darkBg/95 backdrop-blur-sm border-b-2 border-gray-900 dark:border-gray-800 transition-colors duration-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -985,6 +985,10 @@
     <!-- UI Interactions Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Helper to calculate scrollbar width to prevent layout shift
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            const mainNav = document.getElementById('main-nav');
+
             // --- Sticky Banner Logic ---
             const banner = document.getElementById('sticky-banner');
             const dismissBtns = document.querySelectorAll('.dismiss-banner');
@@ -1019,6 +1023,8 @@
                     modalContent.classList.remove('scale-95');
                     modalContent.classList.add('scale-100');
                 }, 10);
+                document.body.style.paddingRight = `${scrollbarWidth}px`;
+                if (mainNav) mainNav.style.paddingRight = `${scrollbarWidth}px`;
                 document.body.style.overflow = 'hidden'; // Prevent scrolling
             }
             
@@ -1030,6 +1036,8 @@
                 
                 setTimeout(() => {
                     modal.classList.add('hidden');
+                    document.body.style.paddingRight = '';
+                    if (mainNav) mainNav.style.paddingRight = '';
                     document.body.style.overflow = '';
                 }, 200); // Wait for transition
             }
@@ -1073,6 +1081,8 @@
                 // Reset and play video
                 videoPlayer.currentTime = 0;
                 videoPlayer.play();
+                document.body.style.paddingRight = `${scrollbarWidth}px`;
+                if (mainNav) mainNav.style.paddingRight = `${scrollbarWidth}px`;
                 document.body.style.overflow = 'hidden';
             }
 
@@ -1085,6 +1095,8 @@
                 
                 setTimeout(() => {
                     videoModal.classList.add('hidden');
+                    document.body.style.paddingRight = '';
+                    if (mainNav) mainNav.style.paddingRight = '';
                     document.body.style.overflow = '';
                 }, 200);
             }
