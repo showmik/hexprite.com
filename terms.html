@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - Hexprite</title>
+    <meta name="description" content="Terms of Service for Hexprite, the pixel art and font editor for embedded displays.">
+    <link rel="canonical" href="https://hexprite.com/terms.html">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="assets/images/LogoMark.png">
+    <link rel="apple-touch-icon" href="assets/images/LogoMark.png">
+
+    <!-- Preconnect Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind Styles -->
     <link rel="stylesheet" href="./assets/css/tailwind.css">
@@ -18,8 +29,6 @@
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
-
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -74,10 +83,10 @@
             <div class="flex items-center justify-between h-16">
                                 <!-- Logo -->
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3 hover:opacity-80 transition-opacity">
-                    <img src="assets/images/logo.png" alt="Hexprite" class="h-7 md:h-8 w-auto dark:hidden" />
-                    <img src="assets/images/logo_light.png" alt="Hexprite" class="h-7 md:h-8 w-auto hidden dark:block" />
+                    <img src="assets/images/logo.png" alt="Hexprite" width="140" height="32" class="h-7 md:h-8 w-auto dark:hidden" />
+                    <img src="assets/images/logo_light.png" alt="Hexprite" width="140" height="32" class="h-7 md:h-8 w-auto hidden dark:block" />
                     <span
-                        class="px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.9.0</span>
+                        class="px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.1.0</span>
                 </a>
 
                 <!-- Desktop Menu -->
@@ -114,7 +123,7 @@
                         </a>
 
                         <!-- Desktop Theme Toggle -->
-                        <button id="theme-toggle" type="button"
+                        <button id="theme-toggle" type="button" aria-label="Toggle theme"
                             class="border-2 border-gray-900 dark:border-gray-700 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-gray-900" fill="currentColor"
                                 viewBox="0 0 20 20">
@@ -132,7 +141,7 @@
 
                 <!-- Mobile Controls (Theme Toggle + Hamburger) -->
                 <div class="flex items-center md:hidden gap-2">
-                    <button id="theme-toggle-mobile" type="button"
+                    <button id="theme-toggle-mobile" type="button" aria-label="Toggle theme"
                         class="w-[36px] h-[36px] flex items-center justify-center border-2 border-gray-900 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                         <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5 text-gray-900" fill="currentColor"
                             viewBox="0 0 20 20">
@@ -141,11 +150,11 @@
                         <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5 text-white" fill="currentColor"
                             viewBox="0 0 20 20">
                             <path
-                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
                                 fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <button id="mobile-menu-btn"
+                    <button id="mobile-menu-btn" type="button" aria-label="Toggle navigation menu"
                         class="w-[36px] h-[36px] flex items-center justify-center border-2 border-gray-900 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -211,9 +220,8 @@
                 <!-- Column 1: Branding -->
                 <div class="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
                     <div class="flex items-center gap-2 mb-4">
-                        <img src="assets/images/logo.png" alt="Hexprite" class="h-6 w-auto dark:hidden" />
-                        <img src="assets/images/logo_light.png" alt="Hexprite" class="h-6 w-auto hidden dark:block" />
-                        
+                        <img src="assets/images/logo.png" alt="Hexprite" width="120" height="24" class="h-6 w-auto dark:hidden" />
+                        <img src="assets/images/logo_light.png" alt="Hexprite" width="120" height="24" class="h-6 w-auto hidden dark:block" />
                     </div>
                     <p class="text-gray-600 dark:text-gray-500 font-mono text-sm max-w-[220px] mx-auto md:mx-0">A dedicated pixel art and font editor for embedded displays.</p>
                     <div class="flex items-center gap-6 mt-8 mb-8">

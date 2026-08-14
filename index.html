@@ -5,6 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hexprite - Pixel Art Editor for Embedded Displays</title>
+    <meta name="description" content="Hexprite is a native pixel art and font editor for embedded displays, OLEDs, and microcontrollers. 1-bit editing, typography, and live hardware streaming.">
+    <link rel="canonical" href="https://hexprite.com/">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="assets/images/LogoMark.png">
+    <link rel="apple-touch-icon" href="assets/images/LogoMark.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hexprite.com/">
+    <meta property="og:title" content="Hexprite - Pixel Art Editor for Embedded Displays">
+    <meta property="og:description" content="A native pixel art and font editor for embedded displays with 1-bit editing, live hardware streaming, and direct C-array source linking.">
+    <meta property="og:image" content="assets/images/hero_screenshot.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://hexprite.com/">
+    <meta name="twitter:title" content="Hexprite - Pixel Art Editor for Embedded Displays">
+    <meta name="twitter:description" content="A native pixel art and font editor for embedded displays with 1-bit editing, live hardware streaming, and direct C-array source linking.">
+    <meta name="twitter:image" content="assets/images/hero_screenshot.png">
+
+    <!-- Preconnect Google Fonts & Preload LCP Hero Image -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="assets/images/hero_screenshot.png" fetchpriority="high">
 
     <!-- Tailwind Styles -->
     <link rel="stylesheet" href="./assets/css/tailwind.css">
@@ -19,8 +45,6 @@
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
-
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -76,10 +100,10 @@
             <div class="flex items-center justify-between h-16">
                                 <!-- Logo -->
                 <a href="#" class="flex-shrink-0 flex items-center gap-3 hover:opacity-80 transition-opacity">
-                    <img src="assets/images/logo.png" alt="Hexprite" class="h-7 md:h-8 w-auto dark:hidden" />
-                    <img src="assets/images/logo_light.png" alt="Hexprite" class="h-7 md:h-8 w-auto hidden dark:block" />
+                    <img src="assets/images/logo.png" alt="Hexprite" width="140" height="32" class="h-7 md:h-8 w-auto dark:hidden" />
+                    <img src="assets/images/logo_light.png" alt="Hexprite" width="140" height="32" class="h-7 md:h-8 w-auto hidden dark:block" />
                     <span
-                        class="px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.9.0</span>
+                        class="px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.1.0</span>
                 </a>
 
                 <!-- Desktop Menu -->
@@ -116,7 +140,7 @@
                         </a>
 
                         <!-- Desktop Theme Toggle -->
-                        <button id="theme-toggle" type="button"
+                        <button id="theme-toggle" type="button" aria-label="Toggle theme"
                             class="border-2 border-gray-900 dark:border-gray-700 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-gray-900" fill="currentColor"
                                 viewBox="0 0 20 20">
@@ -134,7 +158,7 @@
 
                 <!-- Mobile Controls (Theme Toggle + Hamburger) -->
                 <div class="flex items-center md:hidden gap-2">
-                    <button id="theme-toggle-mobile" type="button"
+                    <button id="theme-toggle-mobile" type="button" aria-label="Toggle theme"
                         class="w-[36px] h-[36px] flex items-center justify-center border-2 border-gray-900 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                         <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5 text-gray-900" fill="currentColor"
                             viewBox="0 0 20 20">
@@ -147,7 +171,7 @@
                                 fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <button id="mobile-menu-btn"
+                    <button id="mobile-menu-btn" type="button" aria-label="Toggle navigation menu"
                         class="w-[36px] h-[36px] flex items-center justify-center border-2 border-gray-900 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -210,10 +234,10 @@
             <div
                 class="flex flex-col items-center sm:items-start font-mono text-sm w-full sm:w-auto border-2 border-gray-200 dark:border-gray-800 p-3 sm:border-none sm:p-0">
                 <div class="flex items-center gap-2">
-                    <span class="text-brand">✓</span> <strong>Monochrome:</strong> 100% Free
+                    <span class="text-brand">✓</span> <strong>Monochrome:</strong> 100% Free (Beta)
                 </div>
                 <div class="flex items-center gap-2 opacity-80 mt-2 sm:mt-1">
-                    <span class="text-amber-500">⚡</span> <strong>RGB565:</strong> Paid (Coming Soon)
+                    <span class="text-amber-500">⚡</span> <strong>RGB565:</strong> Future Release
                 </div>
             </div>
         </div>
@@ -233,7 +257,7 @@
         <div
             class="bg-[#1e1e1e] border-4 border-brandDark dark:border-gray-700 shadow-[4px_4px_0px_0px_rgba(34,33,44,1)] md:shadow-indie-light dark:shadow-indie-dark transition-all rounded-t-xl overflow-hidden">
 
-            <img src="assets/images/hero_screenshot.png" alt="Hexprite Interface" class="w-full h-auto block" />
+            <img src="assets/images/hero_screenshot.png" alt="Hexprite Interface" width="1200" height="750" fetchpriority="high" class="w-full h-auto block" />
         </div>
     </section>
     </div> <!-- End Hero & Product Wrapper -->
@@ -252,7 +276,7 @@
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_01_thumbnail.png" alt="Precision Drawing Tools" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_01_thumbnail.webp" alt="Precision Drawing Tools" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                              <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
                                  <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -277,7 +301,7 @@
             <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_02_thumbnail.png" alt="Direct Source Code Sync" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_02_thumbnail.webp" alt="Direct Source Code Sync" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         
                         <!-- Play Button Overlay -->
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -304,7 +328,7 @@
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_03_thumbnail.png" alt="Embedded Typography" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_03_thumbnail.webp" alt="Embedded Typography" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                              <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
                                  <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -329,7 +353,7 @@
             <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_04_thumbnail.png" alt="Live Hardware Streaming" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_04_thumbnail.webp" alt="Live Hardware Streaming" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                              <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
                                  <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -354,7 +378,7 @@
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_05_thumbnail.png" alt="Sprite Animation" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_05_thumbnail.webp" alt="Sprite Animation" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                              <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
                                  <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -379,7 +403,7 @@
             <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_06_thumbnail.png" alt="Advanced Dithering" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_06_thumbnail.webp" alt="Advanced Dithering" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                              <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
                                  <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -404,7 +428,7 @@
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-16 md:mb-24">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_07_thumbnail.png" alt="Built-in Compression" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_07_thumbnail.webp" alt="Built-in Compression" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                              <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
                                  <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -429,7 +453,7 @@
             <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
                 <div class="w-full md:w-1/2">
                     <div class="feature-video-trigger aspect-video bg-[#1e1e1e] border-4 border-gray-900 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none relative cursor-pointer overflow-hidden group">
-                        <img src="assets/images/feat_08_thumbnail.png" alt="Native Flipper Zero Support" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
+                        <img src="assets/images/feat_08_thumbnail.webp" alt="Native Flipper Zero Support" width="560" height="315" class="w-full h-full object-cover transition-opacity group-hover:opacity-80" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                              <div class="bg-gray-900/80 rounded-full p-4 shadow-lg transform transition-transform group-hover:scale-110 border-2 border-gray-700">
                                  <svg class="w-10 h-10 text-brand ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -463,12 +487,12 @@
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Free Tier -->
+            <!-- Free Tier - Beta / Early Access -->
             <div
                 class="bg-[#fdfdfd] dark:bg-darkPanel border-4 border-gray-900 dark:border-gray-700 p-6 md:p-8 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none flex flex-col">
                 <div
-                    class="inline-block bg-gray-900 text-white font-mono text-[10px] md:text-xs font-bold px-2 py-1 mb-4 w-max">
-                    CURRENT</div>
+                    class="inline-block bg-brandButton text-gray-900 font-mono text-[10px] md:text-xs font-bold px-2 py-1 mb-4 w-max border border-gray-900">
+                    BETA / EARLY ACCESS</div>
                 <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">Monochrome Mode</h3>
                 <div class="font-mono text-2xl md:text-3xl font-extrabold text-brand mb-6">FREE</div>
                 <ul class="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 dark:text-gray-400 flex-grow">
@@ -483,28 +507,27 @@
                     <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
                         <span><strong>Direct Code Sync:</strong> Natively update source arrays with RLE/LZSS compression.</span></li>
                     <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span>100% Free forever.</span></li>
+                        <span><strong>Early Access:</strong> 100% Free for community feedback and active testing.</span></li>
                 </ul>
             </div>
 
-            <!-- Pro Tier -->
+            <!-- Pro Tier - Future Roadmap -->
             <div
                 class="bg-gray-50 dark:bg-[#1a1a24] border-4 border-brandRed p-6 md:p-8 shadow-[4px_4px_0px_0px_rgba(255,89,90,1)] dark:shadow-none flex flex-col relative overflow-hidden">
                 <div
                     class="inline-block bg-brandRed text-white font-mono text-[10px] md:text-xs font-bold px-2 py-1 mb-4 w-max">
-                    IN DEVELOPMENT</div>
+                    FUTURE ROADMAP</div>
                 <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">RGB565 Mode</h3>
-                <div class="font-mono text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6">One-Time
-                    Fee</div>
+                <div class="font-mono text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6">Planned Release</div>
                 <ul class="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 dark:text-gray-400 flex-grow">
                     <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span><strong>Color TFT Support:</strong> Designed for ST7735, ILI9341, GC9A01, and color e-paper.</span></li>
+                        <span><strong>Color TFT Support:</strong> Planned for ST7735, ILI9341, GC9A01, and color e-paper.</span></li>
                     <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
                         <span><strong>Advanced Palettes:</strong> Indexed color, RGB565, and up to 32-bit color modes.</span></li>
                     <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
                         <span><strong>Asset Packing:</strong> Generate binary asset bundles for SPI Flash / SD cards.</span></li>
                     <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span>Funds the continued development of the free monochrome edition!</span></li>
+                        <span>Will be developed in the future following the monochrome edition.</span></li>
                 </ul>
             </div>
         </div>
@@ -580,9 +603,8 @@
                 <!-- Column 1: Branding -->
                 <div class="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
                     <div class="flex items-center gap-2 mb-4">
-                        <img src="assets/images/logo.png" alt="Hexprite" class="h-6 w-auto dark:hidden" />
-                        <img src="assets/images/logo_light.png" alt="Hexprite" class="h-6 w-auto hidden dark:block" />
-                        
+                        <img src="assets/images/logo.png" alt="Hexprite" width="120" height="24" class="h-6 w-auto dark:hidden" />
+                        <img src="assets/images/logo_light.png" alt="Hexprite" width="120" height="24" class="h-6 w-auto hidden dark:block" />
                     </div>
                     <p class="text-gray-600 dark:text-gray-500 font-mono text-sm max-w-[220px] mx-auto md:mx-0">A dedicated pixel art and font editor for embedded displays.</p>
                     <div class="flex items-center gap-6 mt-8 mb-8">
@@ -841,7 +863,15 @@
                 return sum;
             }
 
+            let isVisible = true;
+            let animationFrameId = null;
+
             function animate(timestamp) {
+                if (!isVisible) {
+                    animationFrameId = null;
+                    return;
+                }
+
                 // 1. Run Conway's Game of Life logic at a fixed interval
                 if (timestamp - lastUpdate > updateInterval) {
                     for (let x = 0; x < cols; x++) {
@@ -908,10 +938,20 @@
                     }
                 }
                 
-                requestAnimationFrame(animate);
+                animationFrameId = requestAnimationFrame(animate);
             }
             
-            requestAnimationFrame(animate);
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    isVisible = entries[0].isIntersecting;
+                    if (isVisible && !animationFrameId) {
+                        animationFrameId = requestAnimationFrame(animate);
+                    }
+                }, { threshold: 0 });
+                observer.observe(canvas.parentElement);
+            } else {
+                animationFrameId = requestAnimationFrame(animate);
+            }
         })();
     </script>
 
@@ -932,7 +972,7 @@
             </div>
             
             <!-- Mobile dismiss -->
-            <button class="dismiss-banner sm:hidden text-gray-500 hover:text-white p-1 ml-auto">
+            <button class="dismiss-banner sm:hidden text-gray-500 hover:text-white p-1 ml-auto" aria-label="Dismiss banner">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -948,7 +988,7 @@
             </a>
             
             <!-- Desktop dismiss -->
-            <button class="dismiss-banner hidden sm:block text-gray-500 hover:text-brandRed transition-colors p-1">
+            <button class="dismiss-banner hidden sm:block text-gray-500 hover:text-brandRed transition-colors p-1" aria-label="Dismiss banner">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -967,7 +1007,7 @@
                 <h3 class="font-mono font-bold text-lg flex items-center gap-2">
                     <span class="text-brandRed">♥</span> Support Hexprite
                 </h3>
-                <button class="modal-close text-gray-400 hover:text-white transition-colors p-1">
+                <button class="modal-close text-gray-400 hover:text-white transition-colors p-1" aria-label="Close modal">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -975,8 +1015,8 @@
             <!-- Body -->
             <div class="p-6 md:p-8 flex flex-col items-center text-center">
                 <div class="mb-6 flex justify-center w-full">
-                    <img src="assets/images/logo.png" alt="Hexprite" class="h-10 md:h-12 w-auto dark:hidden" />
-                    <img src="assets/images/logo_light.png" alt="Hexprite" class="h-10 md:h-12 w-auto hidden dark:block" />
+                    <img src="assets/images/logo.png" alt="Hexprite" width="160" height="48" class="h-10 md:h-12 w-auto dark:hidden" />
+                    <img src="assets/images/logo_light.png" alt="Hexprite" width="160" height="48" class="h-10 md:h-12 w-auto hidden dark:block" />
                 </div>
                 
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Pay what you want</h4>
@@ -1016,7 +1056,7 @@
             <!-- Video Container -->
             <div class="relative bg-black ring-1 ring-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] rounded-2xl overflow-hidden aspect-video">
                 <!-- Close Button (Minimal, top right inside video) -->
-                <button class="video-modal-close absolute top-4 right-4 z-20 text-white/50 hover:text-white transition-colors p-1 group">
+                <button class="video-modal-close absolute top-4 right-4 z-20 text-white/50 hover:text-white transition-colors p-1 group" aria-label="Close video modal">
                     <svg class="w-8 h-8 drop-shadow-lg transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
