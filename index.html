@@ -705,20 +705,15 @@
                 return y * cols + x;
             }
 
-            // Track mouse and paint "living" cells
-            canvas.parentElement.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                mouseX = e.clientX - rect.left;
-                mouseY = e.clientY - rect.top;
-                
-                const cx = Math.floor(mouseX / gridSize);
-                const cy = Math.floor(mouseY / gridSize);
-                
-                // Paint random noise in brush radius to allow GoL structures to spawn
+            // Paint a sparse cluster of "living" cells in a brush radius around a pixel position
+            function seedAt(px, py) {
+                const cx = Math.floor(px / gridSize);
+                const cy = Math.floor(py / gridSize);
+
                 for(let i = -spawnRadius; i <= spawnRadius; i++) {
                     for(let j = -spawnRadius; j <= spawnRadius; j++) {
                         // Sparse painting prevents immediate death from overpopulation
-                        if (Math.random() > 0.75) { 
+                        if (Math.random() > 0.75) {
                             let nx = cx + i;
                             let ny = cy + j;
                             if (nx >= 0 && nx < cols && ny >= 0 && ny < rows) {
@@ -730,7 +725,40 @@
                         }
                     }
                 }
+            }
+
+            // Track mouse and paint "living" cells
+            canvas.parentElement.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+                seedAt(mouseX, mouseY);
             });
+
+            // Touch support: dragging a finger paints cells the same way a mouse does
+            function seedFromTouch(e) {
+                if (!e.touches || e.touches.length === 0) return;
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                seedAt(touch.clientX - rect.left, touch.clientY - rect.top);
+            }
+            canvas.parentElement.addEventListener('touchstart', seedFromTouch, { passive: true });
+            canvas.parentElement.addEventListener('touchmove', seedFromTouch, { passive: true });
+
+            // Ambient life: periodically seed a random cluster so the animation stays
+            // alive by itself on both touch devices and desktops where the mouse
+            // hasn't crossed the hero yet.
+            function seedAmbient() {
+                if (!isVisible || cols === 0 || rows === 0) return;
+                seedAt(Math.random() * width, Math.random() * height);
+            }
+            setInterval(seedAmbient, 2200);
+
+            // Seed a few clusters immediately so the hero has visible life on first
+            // paint, instead of waiting for the first ambient tick or a mouse/touch move.
+            for (let i = 0; i < 3; i++) {
+                seedAt(Math.random() * width, Math.random() * height);
+            }
 
             function countNeighbors(x, y) {
                 let sum = 0;
