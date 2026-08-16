@@ -655,47 +655,51 @@
             const canvas = document.getElementById('hero-grid-canvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            
+
             let width, height;
             const gridSize = 12; // Pixel art cell size
-            
-            let mouseX = -1000;
-            let mouseY = -1000;
-            
+
             let cols, rows;
             let grid = [];
-            let nextGrid = [];
             let opacity = [];
             let age = [];
-            
+
+            // Cells worth evaluating (alive) / worth rendering (alive or still fading),
+            // so ticking and drawing never have to scan the full cols*rows grid.
+            const aliveSet = new Set();
+            const renderSet = new Set();
+
             const maxAge = 150; // Ticks before a cell dies naturally (prevents infinite oscillators)
             const fadeRate = 0.03; // How fast dead cells fade out visually
             const spawnRadius = 2; // Brush size for painting
 
             let lastUpdate = 0;
             const updateInterval = 60; // Game of Life logic update interval in ms
-            
+
             function resize() {
                 const dpr = window.devicePixelRatio || 1;
                 const rect = canvas.parentElement.getBoundingClientRect();
                 width = rect.width;
                 height = rect.height;
-                
+
                 canvas.width = width * dpr;
                 canvas.height = height * dpr;
                 ctx.scale(dpr, dpr);
-                
+
                 canvas.style.width = width + 'px';
                 canvas.style.height = height + 'px';
-                
+
                 cols = Math.ceil(width / gridSize);
                 rows = Math.ceil(height / gridSize);
-                
+
                 // Initialize memory efficient typed arrays for 2D grid simulation
                 grid = new Uint8Array(cols * rows);
-                nextGrid = new Uint8Array(cols * rows);
                 opacity = new Float32Array(cols * rows);
                 age = new Uint16Array(cols * rows);
+
+                // Indices computed against the old cols/rows are meaningless after a resize
+                aliveSet.clear();
+                renderSet.clear();
             }
 
             window.addEventListener('resize', resize);
@@ -721,6 +725,8 @@
                                 grid[idx] = 1;
                                 age[idx] = 0;
                                 opacity[idx] = 1.0;
+                                aliveSet.add(idx);
+                                renderSet.add(idx);
                             }
                         }
                     }
@@ -730,9 +736,7 @@
             // Track mouse and paint "living" cells
             canvas.parentElement.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
-                mouseX = e.clientX - rect.left;
-                mouseY = e.clientY - rect.top;
-                seedAt(mouseX, mouseY);
+                seedAt(e.clientX - rect.left, e.clientY - rect.top);
             });
 
             // Touch support: dragging a finger paints cells the same way a mouse does
@@ -744,21 +748,6 @@
             }
             canvas.parentElement.addEventListener('touchstart', seedFromTouch, { passive: true });
             canvas.parentElement.addEventListener('touchmove', seedFromTouch, { passive: true });
-
-            // Ambient life: periodically seed a random cluster so the animation stays
-            // alive by itself on both touch devices and desktops where the mouse
-            // hasn't crossed the hero yet.
-            function seedAmbient() {
-                if (!isVisible || cols === 0 || rows === 0) return;
-                seedAt(Math.random() * width, Math.random() * height);
-            }
-            setInterval(seedAmbient, 2200);
-
-            // Seed a few clusters immediately so the hero has visible life on first
-            // paint, instead of waiting for the first ambient tick or a mouse/touch move.
-            for (let i = 0; i < 3; i++) {
-                seedAt(Math.random() * width, Math.random() * height);
-            }
 
             function countNeighbors(x, y) {
                 let sum = 0;
@@ -775,6 +764,100 @@
                 return sum;
             }
 
+            // Run Conway's Game of Life logic, but only over cells that could possibly
+            // change: living cells (may survive/die/age out) and their neighbors (the
+            // only dead cells that can ever be born). Evaluation reads a fully
+            // unmutated grid; all writes happen afterwards in the commit step below,
+            // so there's no need for a second ping-pong buffer.
+            function tick() {
+                const toEvaluate = new Set();
+                for (const idx of aliveSet) {
+                    const x = idx % cols;
+                    const y = (idx / cols) | 0;
+                    toEvaluate.add(idx);
+                    for (let i = -1; i <= 1; i++) {
+                        for (let j = -1; j <= 1; j++) {
+                            if (i === 0 && j === 0) continue;
+                            const nx = x + i;
+                            const ny = y + j;
+                            if (nx >= 0 && nx < cols && ny >= 0 && ny < rows) {
+                                toEvaluate.add(getIndex(nx, ny));
+                            }
+                        }
+                    }
+                }
+
+                const births = [];
+                const deaths = [];
+                const survivors = [];
+
+                for (const idx of toEvaluate) {
+                    const x = idx % cols;
+                    const y = (idx / cols) | 0;
+                    const state = grid[idx];
+                    const neighbors = countNeighbors(x, y);
+
+                    if (state === 0) {
+                        if (neighbors === 3) births.push(idx);
+                    } else if (neighbors < 2 || neighbors > 3 || age[idx] + 1 > maxAge) {
+                        deaths.push(idx);
+                    } else {
+                        survivors.push(idx);
+                    }
+                }
+
+                for (const idx of births) {
+                    grid[idx] = 1;
+                    age[idx] = 0;
+                    opacity[idx] = 1.0;
+                    aliveSet.add(idx);
+                    renderSet.add(idx);
+                }
+                for (const idx of deaths) {
+                    grid[idx] = 0;
+                    aliveSet.delete(idx);
+                    // renderSet keeps idx until the render loop fades its opacity to 0
+                }
+                for (const idx of survivors) {
+                    age[idx]++;
+                }
+            }
+
+            // Draw only cells that are alive or still fading out. A cell enters
+            // renderSet when it's stamped or born, and only leaves once it's both
+            // dead and fully faded (removing it at death time would make it vanish
+            // abruptly instead of fading).
+            function render() {
+                ctx.clearRect(0, 0, width, height);
+                const isDark = document.documentElement.classList.contains('dark');
+
+                const toRemove = [];
+                for (const idx of renderSet) {
+                    const alive = grid[idx] === 1;
+                    opacity[idx] = alive ? 1.0 : Math.max(0, opacity[idx] - fadeRate);
+
+                    if (opacity[idx] <= 0 && !alive) {
+                        toRemove.push(idx);
+                        continue;
+                    }
+
+                    // Map alpha appropriately based on theme using Hexprite brand colors
+                    if (isDark) {
+                        // Brand Button Blue (#42CAFD)
+                        ctx.fillStyle = `rgba(66, 202, 253, ${opacity[idx] * 0.12})`;
+                    } else {
+                        // Brand Blue (#1a8fe3)
+                        ctx.fillStyle = `rgba(26, 143, 227, ${opacity[idx] * 0.08})`;
+                    }
+
+                    const x = idx % cols;
+                    const y = (idx / cols) | 0;
+                    // Draw blocky pixel cell (leaving 1px gap for grid aesthetic)
+                    ctx.fillRect(x * gridSize, y * gridSize, gridSize - 1, gridSize - 1);
+                }
+                for (const idx of toRemove) renderSet.delete(idx);
+            }
+
             let isVisible = true;
             let animationFrameId = null;
 
@@ -784,75 +867,16 @@
                     return;
                 }
 
-                // 1. Run Conway's Game of Life logic at a fixed interval
                 if (timestamp - lastUpdate > updateInterval) {
-                    for (let x = 0; x < cols; x++) {
-                        for (let y = 0; y < rows; y++) {
-                            let idx = getIndex(x, y);
-                            let state = grid[idx];
-                            let neighbors = countNeighbors(x, y);
-                            
-                            // Conway rules
-                            if (state === 0 && neighbors === 3) {
-                                nextGrid[idx] = 1;
-                                age[idx] = 0;
-                            } else if (state === 1 && (neighbors < 2 || neighbors > 3)) {
-                                nextGrid[idx] = 0;
-                            } else {
-                                nextGrid[idx] = state;
-                            }
-                            
-                            // Imposed natural death limit
-                            if (nextGrid[idx] === 1) {
-                                age[idx]++;
-                                if (age[idx] > maxAge) {
-                                    nextGrid[idx] = 0;
-                                }
-                            }
-                        }
-                    }
-                    
-                    // Swap buffers
-                    let temp = grid;
-                    grid = nextGrid;
-                    nextGrid = temp;
-                    
+                    tick();
                     lastUpdate = timestamp;
                 }
-                
-                // 2. Render Loop (Runs at monitor refresh rate for smooth fading)
-                ctx.clearRect(0, 0, width, height);
-                const isDark = document.documentElement.classList.contains('dark');
-                
-                ctx.beginPath();
-                for (let x = 0; x < cols; x++) {
-                    for (let y = 0; y < rows; y++) {
-                        let idx = getIndex(x, y);
-                        
-                        if (grid[idx] === 1) {
-                            opacity[idx] = 1.0;
-                        } else {
-                            opacity[idx] = Math.max(0, opacity[idx] - fadeRate);
-                        }
-                        
-                        if (opacity[idx] > 0) {
-                            // Map alpha appropriately based on theme using Hexprite brand colors
-                            if (isDark) {
-                                // Brand Button Blue (#42CAFD)
-                                ctx.fillStyle = `rgba(66, 202, 253, ${opacity[idx] * 0.12})`;
-                            } else {
-                                // Brand Blue (#1a8fe3)
-                                ctx.fillStyle = `rgba(26, 143, 227, ${opacity[idx] * 0.08})`;
-                            }
-                            // Draw blocky pixel cell (leaving 1px gap for grid aesthetic)
-                            ctx.fillRect(x * gridSize, y * gridSize, gridSize - 1, gridSize - 1);
-                        }
-                    }
-                }
-                
+
+                render();
+
                 animationFrameId = requestAnimationFrame(animate);
             }
-            
+
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
                     isVisible = entries[0].isIntersecting;
