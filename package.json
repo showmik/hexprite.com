@@ -4,8 +4,10 @@
   "description": "",
   "main": "tailwind.config.js",
   "scripts": {
+    "build:html": "node scripts/build-html.js",
     "build:css": "tailwindcss -i ./input.css -o ./assets/css/tailwind.css --minify",
-    "watch:css": "tailwindcss -i ./input.css -o ./assets/css/tailwind.css --watch"
+    "watch:css": "tailwindcss -i ./input.css -o ./assets/css/tailwind.css --watch",
+    "build": "npm run build:html && npm run build:css"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,62 @@
+    <!-- Preconnect Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Styles -->
+    <link rel="stylesheet" href="./assets/css/tailwind.css">
+
+    <!-- Theme Initialization Script -->
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        ::selection {
+            background-color: #1a8fe3;
+            color: white;
+        }
+
+        /* Grid background pattern for image placeholders */
+        .bg-grid-pattern {
+            background-size: 20px 20px;
+            background-image:
+                linear-gradient(to right, rgba(128, 128, 128, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
+        }
+
+        @keyframes pop-jump {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            40% {
+                transform: translateY(-5px) scale(1.02);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .animate-pop-jump {
+            animation: pop-jump 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            will-change: transform;
+        }
+    </style>
