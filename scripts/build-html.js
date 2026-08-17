@@ -13,6 +13,7 @@ const TOKENS = {
         NAV_TRANSITION: 'transition duration-300 ease-in-out',
         DOWNLOAD_CTA_HREF: '#',
         DOWNLOAD_CTA_CLASS: 'download-trigger ',
+        LICENSE_CONTENT: '',
     },
     subpage: {
         HOME_HREF: 'index.html',
@@ -21,6 +22,7 @@ const TOKENS = {
         NAV_TRANSITION: 'transition-colors duration-200',
         DOWNLOAD_CTA_HREF: 'index.html#download-btn',
         DOWNLOAD_CTA_CLASS: '',
+        LICENSE_CONTENT: '',
     },
 };
 
@@ -50,7 +52,102 @@ function applyTokens(content, tokens) {
     return result;
 }
 
+function licenseToHtml() {
+    const raw = fs.readFileSync(path.join(repoRoot, 'LICENSE'), 'utf8');
+    const lines = raw.split(/\r?\n/);
+    const html = [];
+    const sectionHeadingRe = /^(\d+)\.\s+(.+)$/;
+
+    let i = 0;
+
+    // Line 1: title — rendered by the <h1> in the template, skip it
+    i++;
+
+    // Skip blank lines after title
+    while (i < lines.length && lines[i].trim() === '') i++;
+
+    // Preamble paragraphs (copyright, intro) — collect until first numbered section
+    let paraLines = [];
+    while (i < lines.length && !sectionHeadingRe.test(lines[i])) {
+        if (lines[i].trim() === '') {
+            if (paraLines.length) {
+                html.push(`            <p>${paraLines.join(' ')}</p>`);
+                paraLines = [];
+            }
+        } else {
+            paraLines.push(lines[i].trim());
+        }
+        i++;
+    }
+    if (paraLines.length) {
+        html.push(`            <p>${paraLines.join(' ')}</p>`);
+        paraLines = [];
+    }
+
+    // Numbered sections
+    while (i < lines.length) {
+        const headingMatch = lines[i].match(sectionHeadingRe);
+        if (headingMatch) {
+            html.push('');
+            html.push(`            <h2 class="text-xl font-bold font-mono text-gray-900 dark:text-white mt-8">${headingMatch[1]}. ${headingMatch[2]}</h2>`);
+            i++;
+
+            let bullets = [];
+            paraLines = [];
+
+            while (i < lines.length && !sectionHeadingRe.test(lines[i])) {
+                const line = lines[i];
+
+                if (line.startsWith('* ')) {
+                    // Flush any pending paragraph
+                    if (paraLines.length) {
+                        html.push(`            <p>${paraLines.join(' ')}</p>`);
+                        paraLines = [];
+                    }
+                    bullets.push(line.slice(2).trim());
+                } else if (line.startsWith('  ') && bullets.length) {
+                    // Continuation line of the last bullet
+                    bullets[bullets.length - 1] += ' ' + line.trim();
+                } else if (line.trim() === '') {
+                    // Flush bullets
+                    if (bullets.length) {
+                        html.push(`            <ul class="list-disc pl-5 mt-2 space-y-2">`);
+                        for (const b of bullets) html.push(`                <li>${b}</li>`);
+                        html.push(`            </ul>`);
+                        bullets = [];
+                    }
+                    // Flush paragraph
+                    if (paraLines.length) {
+                        html.push(`            <p>${paraLines.join(' ')}</p>`);
+                        paraLines = [];
+                    }
+                } else {
+                    paraLines.push(line.trim());
+                }
+                i++;
+            }
+
+            // Flush any remaining content at end of section
+            if (bullets.length) {
+                html.push(`            <ul class="list-disc pl-5 mt-2 space-y-2">`);
+                for (const b of bullets) html.push(`                <li>${b}</li>`);
+                html.push(`            </ul>`);
+            }
+            if (paraLines.length) {
+                html.push(`            <p>${paraLines.join(' ')}</p>`);
+            }
+        } else {
+            i++;
+        }
+    }
+
+    return html.join('\n');
+}
+
 function build() {
+    // Generate LICENSE_CONTENT from the plain-text LICENSE file
+    TOKENS.subpage.LICENSE_CONTENT = licenseToHtml();
+
     const pageFiles = fs.readdirSync(pagesDir).filter((f) => f.endsWith('.html'));
 
     for (const fileName of pageFiles) {
