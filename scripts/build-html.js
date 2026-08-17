@@ -7,7 +7,7 @@ const pagesDir = path.join(templatesDir, 'pages');
 
 const TOKENS = {
     home: {
-        HOME_HREF: '#',
+        HOME_HREF: '',
         HOME_PREFIX: '',
         NAV_ID_ATTR: ' id="main-nav"',
         NAV_TRANSITION: 'transition duration-300 ease-in-out',
