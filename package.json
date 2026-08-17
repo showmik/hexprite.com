@@ -4,10 +4,11 @@
   "description": "",
   "main": "tailwind.config.js",
   "scripts": {
+    "build:fonts": "node scripts/download-fonts.js",
     "build:html": "node scripts/build-html.js",
     "build:css": "tailwindcss -i ./input.css -o ./assets/css/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./input.css -o ./assets/css/tailwind.css --watch",
-    "build": "npm run build:html && npm run build:css"
+    "build": "npm run build:fonts && npm run build:html && npm run build:css"
   },
   "keywords": [],
   "author": "",
