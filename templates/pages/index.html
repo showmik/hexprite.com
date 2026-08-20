@@ -83,11 +83,55 @@
 
     <!-- Main App Screenshot Section -->
     <section id="product" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24 relative z-10">
-        <!-- Mockup Container -->
-        <div
-            class="bg-[#1e1e1e] border-4 border-brandDark dark:border-gray-700 shadow-[4px_4px_0px_0px_rgba(34,33,44,1)] md:shadow-indie-light dark:shadow-indie-dark transition-all rounded-t-xl overflow-hidden">
+        <div class="relative group">
+            <!-- Multi-Layer Ambient Backlight Glow -->
+            <div class="absolute -inset-1 sm:-inset-2 md:-inset-4 bg-gradient-to-r from-brand/30 via-brandButton/40 to-brand/30 dark:from-brand/40 dark:via-brandButton/30 dark:to-indigo-500/30 rounded-3xl blur-2xl md:blur-3xl opacity-60 dark:opacity-50 group-hover:opacity-80 transition duration-700 -z-10"></div>
+            
+            <!-- Secondary directional spotlight for contrast -->
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-brand/20 dark:bg-brandButton/20 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
 
-            <img src="assets/images/hero_screenshot.webp" alt="Hexprite Interface" width="1200" height="750" fetchpriority="high" class="w-full h-auto block" />
+            <!-- Main Window Mockup Container with Gradient Border & Shadow -->
+            <div class="p-[2px] sm:p-[3px] rounded-xl sm:rounded-2xl bg-gradient-to-b from-brand/50 via-gray-700/60 to-brandDark/80 dark:from-brand/60 dark:via-gray-700/40 dark:to-gray-800/80 shadow-[0_20px_50px_rgba(26,143,227,0.18)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(26,143,227,0.25)] transition-all duration-300 group-hover:shadow-[0_25px_65px_rgba(26,143,227,0.25)] dark:group-hover:shadow-[0_30px_70px_rgba(0,0,0,0.9),0_0_50px_rgba(26,143,227,0.35)]">
+                
+                <div class="relative bg-[#1e1e1e] rounded-[10px] sm:rounded-[14px] overflow-hidden">
+                    <!-- Glass Specular Reflection Highlight Line -->
+                    <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none z-20"></div>
+
+                    <!-- Screenshot Image -->
+                    <img src="assets/images/hero_screenshot.webp" 
+                         alt="Hexprite Interface" 
+                         width="1200" 
+                         height="750" 
+                         fetchpriority="high" 
+                         class="w-full h-auto block transform group-hover:scale-[1.003] transition-transform duration-500 ease-out" />
+                </div>
+            </div>
+
+            <!-- Floating Feature Callout Chips (Desktop & Tablet) -->
+            <!-- Top Right: Live Serial Stream -->
+            <div class="hidden sm:flex items-center gap-2 absolute -top-4 -right-2 md:-right-4 bg-[#1a1a24]/95 dark:bg-[#15151e]/95 backdrop-blur-md border-2 border-brand/50 px-3.5 py-1.5 rounded-full text-xs font-mono text-white shadow-lg z-20 hover:border-brand transition-all">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-gray-300">Live Hardware:</span>
+                <span class="text-brandButton font-bold">115,200 Baud</span>
+            </div>
+
+            <!-- Top Left / Left: Display Specification -->
+            <div class="hidden md:flex items-center gap-2 absolute top-12 -left-5 bg-[#1a1a24]/95 dark:bg-[#15151e]/95 backdrop-blur-md border-2 border-brand/40 px-3 py-1.5 rounded-full text-xs font-mono text-white shadow-lg z-20">
+                <span class="text-brand font-bold">■</span>
+                <span class="text-gray-300">SSD1306 (128×45)</span>
+                <span class="text-gray-500">•</span>
+                <span class="text-brandButton">1-Bit OLED</span>
+            </div>
+
+            <!-- Bottom Right: Direct C-Array Sync -->
+            <div class="hidden sm:flex items-center gap-2 absolute -bottom-4 -right-2 md:right-6 bg-[#1a1a24]/95 dark:bg-[#15151e]/95 backdrop-blur-md border-2 border-brand/40 px-3.5 py-1.5 rounded-full text-xs font-mono text-white shadow-lg z-20">
+                <span class="text-brand font-bold">⇌</span>
+                <span class="text-gray-300">Sync:</span>
+                <span class="text-emerald-400 font-bold">TinyRogueSprites.h</span>
+            </div>
         </div>
     </section>
     </div> <!-- End Hero & Product Wrapper -->
