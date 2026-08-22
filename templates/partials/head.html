@@ -1,3 +1,6 @@
+    <!-- Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <!-- Preload Critical Fonts for Instant First Paint -->
     <link rel="preload" href="./assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="./assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -13,8 +16,11 @@
     <!-- Tailwind Styles -->
     <link rel="stylesheet" href="./assets/css/tailwind.css">
 
+    <!-- Preconnect Umami Analytics -->
+    <link rel="preconnect" href="https://cloud.umami.is">
+
     <!-- Umami Analytics -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="5f4ad7ae-d229-4674-bed2-c36a8aab6755"></script>
+    <script defer src="{{UMAMI_SCRIPT_URL}}" data-website-id="{{UMAMI_WEBSITE_ID}}" data-domains="{{UMAMI_DOMAINS}}" data-do-not-track="true"></script>
 
     <!-- Theme Initialization Script -->
     <script>

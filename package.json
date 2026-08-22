@@ -4,6 +4,7 @@
   "description": "",
   "main": "tailwind.config.js",
   "scripts": {
+    "update:release": "node scripts/fetch-release.js",
     "build:fonts": "node scripts/download-fonts.js",
     "build:html": "node scripts/build-html.js",
     "build:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./input.css -o ./assets/css/tailwind.css --minify",

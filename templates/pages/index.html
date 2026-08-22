@@ -28,7 +28,7 @@
     <meta name="twitter:image" content="assets/images/hero_screenshot.png">
 
     <!-- Preload LCP Hero Image -->
-    <link rel="preload" as="image" href="assets/images/hero_screenshot.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/hero_screenshot.webp" type="image/webp" fetchpriority="high">
 
     <!-- include:partials/head.html -->
 </head>
@@ -809,9 +809,10 @@
                 </div>
                 
                 <!-- Skip Link -->
-                <a href="https://github.com/showmik/hexprite/releases/download/v0.1.0-beta/Hexprite-Setup-0.1.0-beta-x64.exe"
+                <a id="direct-download-link"
+                    href="{{DOWNLOAD_EXE_URL}}"
                     data-umami-event="download-binary"
-                    data-umami-event-version="v0.1.0-beta"
+                    data-umami-event-version="{{VERSION_TAG}}"
                     class="text-sm font-mono text-gray-500 hover:text-brand transition-colors underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700 hover:decoration-brand">
                     No thanks, just take me to the download.
                 </a>

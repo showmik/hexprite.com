@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { getReleaseInfo } = require('./fetch-release');
 
 const repoRoot = path.resolve(__dirname, '..');
 const templatesDir = path.join(repoRoot, 'templates');
@@ -7,6 +8,7 @@ const pagesDir = path.join(templatesDir, 'pages');
 
 const UMAMI_SCRIPT_URL = process.env.UMAMI_SCRIPT_URL || 'https://cloud.umami.is/script.js';
 const UMAMI_WEBSITE_ID = process.env.UMAMI_WEBSITE_ID || '5f4ad7ae-d229-4674-bed2-c36a8aab6755';
+const UMAMI_DOMAINS = process.env.UMAMI_DOMAINS || 'hexprite.com,www.hexprite.com';
 
 const TOKENS = {
     home: {
@@ -19,6 +21,7 @@ const TOKENS = {
         LICENSE_CONTENT: '',
         UMAMI_SCRIPT_URL,
         UMAMI_WEBSITE_ID,
+        UMAMI_DOMAINS,
     },
     subpage: {
         HOME_HREF: 'index.html',
@@ -30,6 +33,7 @@ const TOKENS = {
         LICENSE_CONTENT: '',
         UMAMI_SCRIPT_URL,
         UMAMI_WEBSITE_ID,
+        UMAMI_DOMAINS,
     },
 };
 
@@ -151,7 +155,19 @@ function licenseToHtml() {
     return html.join('\n');
 }
 
-function build() {
+async function build() {
+    // Resolve dynamic release tokens from GitHub Releases / Cache
+    const release = await getReleaseInfo();
+    const releaseTokens = {
+        VERSION_TAG: release.tag_name,
+        VERSION_NUM: release.version,
+        DOWNLOAD_EXE_URL: release.download_url,
+        RELEASE_URL: release.release_url,
+    };
+
+    Object.assign(TOKENS.home, releaseTokens);
+    Object.assign(TOKENS.subpage, releaseTokens);
+
     // Generate LICENSE_CONTENT from the plain-text LICENSE file
     TOKENS.subpage.LICENSE_CONTENT = licenseToHtml();
 
@@ -170,4 +186,7 @@ function build() {
     }
 }
 
-build();
+build().catch((err) => {
+    console.error('Build failed:', err);
+    process.exit(1);
+});
