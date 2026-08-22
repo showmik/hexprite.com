@@ -5,6 +5,9 @@ const repoRoot = path.resolve(__dirname, '..');
 const templatesDir = path.join(repoRoot, 'templates');
 const pagesDir = path.join(templatesDir, 'pages');
 
+const UMAMI_SCRIPT_URL = process.env.UMAMI_SCRIPT_URL || 'https://cloud.umami.is/script.js';
+const UMAMI_WEBSITE_ID = process.env.UMAMI_WEBSITE_ID || '5f4ad7ae-d229-4674-bed2-c36a8aab6755';
+
 const TOKENS = {
     home: {
         HOME_HREF: '',
@@ -14,6 +17,8 @@ const TOKENS = {
         DOWNLOAD_CTA_HREF: '#',
         DOWNLOAD_CTA_CLASS: 'download-trigger ',
         LICENSE_CONTENT: '',
+        UMAMI_SCRIPT_URL,
+        UMAMI_WEBSITE_ID,
     },
     subpage: {
         HOME_HREF: 'index.html',
@@ -23,6 +28,8 @@ const TOKENS = {
         DOWNLOAD_CTA_HREF: 'index.html#download-btn',
         DOWNLOAD_CTA_CLASS: '',
         LICENSE_CONTENT: '',
+        UMAMI_SCRIPT_URL,
+        UMAMI_WEBSITE_ID,
     },
 };
 

@@ -58,6 +58,8 @@
 
         <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8 px-4">
             <a id="download-btn" href="#"
+                data-umami-event="download-click"
+                data-umami-event-location="hero"
                 class="download-trigger inline-flex justify-center items-center px-8 py-4 border-2 border-brandDark bg-brandButton text-gray-900 font-mono font-bold text-lg hover:translate-y-[2px] hover:translate-x-[2px] shadow-indie-light hover:shadow-indie-hover-light transition-all w-full sm:w-auto">
                 ↓ Download (.exe)
             </a>
@@ -456,6 +458,8 @@
 
             <div class="mt-10 md:mt-12 flex flex-col sm:flex-row justify-center gap-4 md:gap-6 px-4">
                 <a href="https://www.patreon.com/hexprite" target="_blank" rel="noopener noreferrer"
+                    data-umami-event="patreon-click"
+                    data-umami-event-location="support-section"
                     class="px-6 py-4 md:px-8 md:py-4 bg-[#FF424D] text-white font-mono font-bold text-base md:text-lg hover:bg-[#ff5a63] border-2 border-gray-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] transition-all flex items-center justify-center gap-2">
                     <svg class="w-5 h-5 md:w-6 md:h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.384 0C20.142 0 24 3.858 24 8.616c0 4.757-3.858 8.615-8.616 8.615-4.757 0-8.615-3.858-8.615-8.615C6.769 3.858 10.627 0 15.384 0zM0 0h4.21v24H0V0z"/>
@@ -463,6 +467,8 @@
                     Support on Patreon
                 </a>
                 <a href="https://github.com/showmik/hexprite" target="_blank" rel="noopener noreferrer"
+                    data-umami-event="github-star-click"
+                    data-umami-event-location="support-section"
                     class="px-6 py-4 md:px-8 md:py-4 bg-gray-800 text-white font-mono font-bold text-base md:text-lg hover:bg-gray-700 border-2 border-gray-600 active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2">
                     ★ Star on GitHub
                 </a>
@@ -745,13 +751,16 @@
                 <div class="bg-brand h-full transition-all" style="width: 5%"></div>
             </div>
             
-            <a href="#support" class="bg-brandButton text-gray-900 px-5 py-2 font-mono text-sm font-bold border-2 border-brandDark hover:bg-[#FFEA00] hover:translate-x-[1px] hover:translate-y-[1px] transition-all whitespace-nowrap shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] hover:shadow-none">
+            <a href="#support"
+                data-umami-event="support-click"
+                data-umami-event-location="sticky-banner"
+                class="bg-brandButton text-gray-900 px-5 py-2 font-mono text-sm font-bold border-2 border-brandDark hover:bg-[#FFEA00] hover:translate-x-[1px] hover:translate-y-[1px] transition-all whitespace-nowrap shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] hover:shadow-none">
                 ♥ Donate
             </a>
             
             <!-- Desktop dismiss -->
             <button class="dismiss-banner hidden sm:block text-gray-500 hover:text-brandRed transition-colors p-1" aria-label="Dismiss banner">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <svg class="w-5 h-5 fill-none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
     </div>
@@ -789,6 +798,8 @@
                 <!-- Patreon CTA -->
                 <div class="w-full mb-6">
                     <a href="https://www.patreon.com/hexprite" target="_blank" rel="noopener noreferrer"
+                        data-umami-event="patreon-click"
+                        data-umami-event-location="download-modal"
                         class="w-full py-3 px-6 bg-[#FF424D] hover:bg-[#ff5a63] text-white font-mono font-bold text-base border-2 border-gray-900 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] active:shadow-[0px_0px_0px_0px_rgba(17,24,39,1)] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.384 0C20.142 0 24 3.858 24 8.616c0 4.757-3.858 8.615-8.616 8.615-4.757 0-8.615-3.858-8.615-8.615C6.769 3.858 10.627 0 15.384 0zM0 0h4.21v24H0V0z"/>
@@ -798,7 +809,10 @@
                 </div>
                 
                 <!-- Skip Link -->
-                <a href="https://github.com/showmik/hexprite/releases/download/v0.1.0-beta/Hexprite-Setup-0.1.0-beta-x64.exe" class="text-sm font-mono text-gray-500 hover:text-brand transition-colors underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700 hover:decoration-brand">
+                <a href="https://github.com/showmik/hexprite/releases/download/v0.1.0-beta/Hexprite-Setup-0.1.0-beta-x64.exe"
+                    data-umami-event="download-binary"
+                    data-umami-event-version="v0.1.0-beta"
+                    class="text-sm font-mono text-gray-500 hover:text-brand transition-colors underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700 hover:decoration-brand">
                     No thanks, just take me to the download.
                 </a>
             </div>
@@ -929,6 +943,10 @@
                 }
 
                 if (!videoFile) return;
+
+                if (window.umami) {
+                    window.umami.track('video-preview-play', { video: videoFile });
+                }
 
                 videoModal.classList.remove('hidden');
                 // Force reflow

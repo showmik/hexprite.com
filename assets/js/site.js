@@ -40,6 +40,10 @@ themeToggleBtns.forEach(btn => {
             localStorage.setItem('color-theme', 'light');
         }
 
+        if (window.umami) {
+            window.umami.track('theme-toggle', { mode: willBeDark ? 'dark' : 'light' });
+        }
+
         // Trigger download button pop animation
         const downloadBtn = document.getElementById('download-btn');
         if (downloadBtn) {
