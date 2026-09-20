@@ -12,7 +12,7 @@ const UMAMI_DOMAINS = process.env.UMAMI_DOMAINS || 'hexprite.com,www.hexprite.co
 
 const TOKENS = {
     home: {
-        HOME_HREF: '',
+        HOME_HREF: '/',
         HOME_PREFIX: '',
         NAV_ID_ATTR: ' id="main-nav"',
         NAV_TRANSITION: 'transition duration-300 ease-in-out',
@@ -24,11 +24,11 @@ const TOKENS = {
         UMAMI_DOMAINS,
     },
     subpage: {
-        HOME_HREF: 'index.html',
-        HOME_PREFIX: 'index.html',
+        HOME_HREF: '/',
+        HOME_PREFIX: '/',
         NAV_ID_ATTR: '',
         NAV_TRANSITION: 'transition-colors duration-200',
-        DOWNLOAD_CTA_HREF: 'index.html#download-btn',
+        DOWNLOAD_CTA_HREF: '/#download-btn',
         DOWNLOAD_CTA_CLASS: '',
         LICENSE_CONTENT: '',
         UMAMI_SCRIPT_URL,

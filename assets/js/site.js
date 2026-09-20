@@ -1,3 +1,9 @@
+// Clean URL: Strip /index.html from address bar if present
+if (typeof window !== 'undefined' && window.location && window.location.pathname.endsWith('/index.html')) {
+    const cleanPath = window.location.pathname.replace(/\/index\.html$/, '/') + window.location.search + window.location.hash;
+    window.history.replaceState(null, '', cleanPath);
+}
+
 // --- Theme Toggle Logic ---
 const themeToggleBtns = [
     document.getElementById('theme-toggle'),
