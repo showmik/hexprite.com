@@ -5,15 +5,35 @@ const repoRoot = path.resolve(__dirname, "..");
 const cacheFile = path.join(repoRoot, "data", "release.json");
 
 const FALLBACK_RELEASE = {
-    tag_name: "v0.1.1-beta",
-    version: "0.1.1-beta",
-    name: "Hexprite v0.1.1-beta",
+    tag_name: "v0.2.1-beta",
+    version: "0.2.1-beta",
+    name: "Hexprite v0.2.1-beta",
     prerelease: true,
-    download_url: "https://github.com/showmik/hexprite/releases/download/v0.1.1-beta/Hexprite-Setup-0.1.1-beta-x64.exe",
-    release_url: "https://github.com/showmik/hexprite/releases/tag/v0.1.1-beta",
-    published_at: new Date().toISOString(),
+    download_url: "https://github.com/showmik/hexprite/releases/download/v0.2.1-beta/Hexprite-Setup-0.2.1-beta-x64.exe",
+    release_url: "https://github.com/showmik/hexprite/releases/tag/v0.2.1-beta",
+    published_at: "2026-09-20T18:31:19Z",
     updated_at: new Date().toISOString(),
 };
+
+function compareSemver(a, b) {
+    if (!a && !b) return 0;
+    if (!a) return -1;
+    if (!b) return 1;
+    const cleanA = a.replace(/^v/, "").trim();
+    const cleanB = b.replace(/^v/, "").trim();
+    const [numA, preA] = cleanA.split("-");
+    const [numB, preB] = cleanB.split("-");
+    const partsA = (numA || "").split(".").map(n => parseInt(n, 10) || 0);
+    const partsB = (numB || "").split(".").map(n => parseInt(n, 10) || 0);
+    for (let i = 0; i < 3; i++) {
+        const diff = (partsA[i] || 0) - (partsB[i] || 0);
+        if (diff !== 0) return diff;
+    }
+    if (!preA && preB) return 1;
+    if (preA && !preB) return -1;
+    if (preA && preB) return preA.localeCompare(preB, undefined, { numeric: true, sensitivity: "base" });
+    return 0;
+}
 
 function readCachedRelease() {
     try {
@@ -117,8 +137,12 @@ async function fetchFromRestApi() {
         const releases = await res.json();
         if (!Array.isArray(releases) || releases.length === 0) return null;
 
-        const latest = releases.find((r) => !r.draft);
-        if (!latest) return null;
+        const validReleases = releases.filter((r) => !r.draft && r.tag_name);
+        if (validReleases.length === 0) return null;
+
+        // Sort by SemVer descending
+        validReleases.sort((a, b) => compareSemver(b.tag_name, a.tag_name));
+        const latest = validReleases[0];
 
         const tagName = latest.tag_name;
         const versionNum = tagName.replace(/^v/, "");
@@ -181,4 +205,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { getReleaseInfo, readCachedRelease, saveCachedRelease };
+module.exports = { getReleaseInfo, readCachedRelease, saveCachedRelease, compareSemver };

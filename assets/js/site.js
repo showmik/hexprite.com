@@ -114,13 +114,35 @@ fetchStars().then(stars => {
     const versionBadges = document.querySelectorAll('.version-badge');
     const directDownloadLink = document.getElementById('direct-download-link');
 
+    // SemVer comparison: returns > 0 if a > b, < 0 if a < b, 0 if equal
+    function compareSemver(a, b) {
+        if (!a && !b) return 0;
+        if (!a) return -1;
+        if (!b) return 1;
+        const cleanA = a.replace(/^v/, '').trim();
+        const cleanB = b.replace(/^v/, '').trim();
+        const [numA, preA] = cleanA.split('-');
+        const [numB, preB] = cleanB.split('-');
+        const partsA = (numA || '').split('.').map(n => parseInt(n, 10) || 0);
+        const partsB = (numB || '').split('.').map(n => parseInt(n, 10) || 0);
+        for (let i = 0; i < 3; i++) {
+            const diff = (partsA[i] || 0) - (partsB[i] || 0);
+            if (diff !== 0) return diff;
+        }
+        if (!preA && preB) return 1;  // non-prerelease > prerelease (e.g. 0.2.0 > 0.2.0-beta)
+        if (preA && !preB) return -1;
+        if (preA && preB) return preA.localeCompare(preB, undefined, { numeric: true, sensitivity: 'base' });
+        return 0;
+    }
+
     const updateDOMRelease = (tag, downloadUrl) => {
         if (tag) {
+            const displayTag = tag.startsWith('v') ? tag : 'v' + tag;
             versionBadges.forEach(el => {
-                el.innerText = tag;
+                el.innerText = displayTag;
             });
             if (directDownloadLink) {
-                directDownloadLink.setAttribute('data-umami-event-version', tag);
+                directDownloadLink.setAttribute('data-umami-event-version', displayTag);
             }
         }
         if (downloadUrl && directDownloadLink) {
@@ -128,35 +150,50 @@ fetchStars().then(stars => {
         }
     };
 
-    // 1. Check localStorage cached release
+    // Track highest version seen so far (start with what is already rendered in the HTML)
+    let currentVersion = versionBadges[0] ? versionBadges[0].innerText.trim() : '';
+
+    // 1. Stale-While-Revalidate: Check localStorage cached release
+    let shouldSkipNetwork = false;
     try {
         const cachedRaw = localStorage.getItem('hexprite-cached-release');
         if (cachedRaw) {
             const cached = JSON.parse(cachedRaw);
-            const isFresh = cached.cachedAt && (Date.now() - cached.cachedAt < 3600000); // 1 hour TTL
             if (cached.tag_name) {
-                updateDOMRelease(cached.tag_name, cached.download_url);
+                // Only apply cached version if it's not older than the rendered HTML
+                if (compareSemver(cached.tag_name, currentVersion) >= 0) {
+                    currentVersion = cached.tag_name;
+                    updateDOMRelease(cached.tag_name, cached.download_url);
+                }
             }
-            if (isFresh) return; // Fresh cache, skip network request
+            // Skip network only if cache is very fresh (less than 60 seconds old)
+            if (cached.cachedAt && (Date.now() - cached.cachedAt < 60000)) {
+                shouldSkipNetwork = true;
+            }
         }
     } catch (e) {
         // Silently ignore storage issues
     }
 
+    if (shouldSkipNetwork) return;
+
     // 2. Multi-tier background release fetch
     const fetchOptions = typeof AbortSignal !== 'undefined' && AbortSignal.timeout
-        ? { signal: AbortSignal.timeout(4000) }
+        ? { signal: AbortSignal.timeout(5000) }
         : {};
 
     const fetchRelease = async () => {
-        // Tier 1: Try GitHub REST API
+        // Tier 1: Try GitHub REST API with SemVer sorting
         try {
-            const res = await fetch('https://api.github.com/repos/showmik/hexprite/releases?per_page=5', fetchOptions);
+            const res = await fetch('https://api.github.com/repos/showmik/hexprite/releases?per_page=10', fetchOptions);
             if (res.ok) {
                 const releases = await res.json();
                 if (Array.isArray(releases) && releases.length > 0) {
-                    const latest = releases.find(r => !r.draft);
-                    if (latest && latest.tag_name) {
+                    const validReleases = releases.filter(r => !r.draft && r.tag_name);
+                    if (validReleases.length > 0) {
+                        // Sort by SemVer descending to always pick the highest version
+                        validReleases.sort((a, b) => compareSemver(b.tag_name, a.tag_name));
+                        const latest = validReleases[0];
                         const tag = latest.tag_name;
                         const versionNum = tag.replace(/^v/, '');
                         let downloadUrl = '';
@@ -178,12 +215,25 @@ fetchStars().then(stars => {
                 }
             }
         } catch (err) {
-            // Proceed to Tier 2 fallback
+            // Proceed to Tier 2
         }
 
-        // Tier 2: Try Shields.io (No rate limit, global CORS)
+        // Tier 2: Try same-origin static release.json (no CORS, no rate limit)
         try {
-            const res = await fetch('https://img.shields.io/github/v/release/showmik/hexprite.json?include_prereleases', fetchOptions);
+            const res = await fetch('data/release.json', fetchOptions);
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.tag_name && data.download_url) {
+                    return { tag: data.tag_name, downloadUrl: data.download_url };
+                }
+            }
+        } catch (err) {
+            // Proceed to Tier 3
+        }
+
+        // Tier 3: Try Shields.io (No rate limit, global CORS)
+        try {
+            const res = await fetch('https://img.shields.io/github/v/release/showmik/hexprite.json?include_prereleases&sort=semver', fetchOptions);
             if (res.ok) {
                 const data = await res.json();
                 const tag = data.value || data.message;
@@ -201,8 +251,12 @@ fetchStars().then(stars => {
     };
 
     fetchRelease().then(info => {
-        if (!info) return;
-        updateDOMRelease(info.tag, info.downloadUrl);
+        if (!info || !info.tag) return;
+        // Never downgrade the DOM
+        if (compareSemver(info.tag, currentVersion) >= 0) {
+            currentVersion = info.tag;
+            updateDOMRelease(info.tag, info.downloadUrl);
+        }
         try {
             localStorage.setItem('hexprite-cached-release', JSON.stringify({
                 tag_name: info.tag,
