@@ -64,17 +64,42 @@ themeToggleBtns.forEach(btn => {
 const btn = document.getElementById('mobile-menu-btn');
 const menu = document.getElementById('mobile-menu');
 
-btn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-});
-
-// Close mobile menu when a link is clicked
-const mobileLinks = menu.querySelectorAll('a');
-mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
+if (btn && menu) {
+    const closeMobileMenu = () => {
         menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+    };
+
+    const toggleMobileMenu = () => {
+        const isHidden = menu.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+    };
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileMenu();
     });
-});
+
+    // Close mobile menu when a link is clicked
+    const mobileLinks = menu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close when clicking outside the menu
+    document.addEventListener('click', (e) => {
+        if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+            closeMobileMenu();
+        }
+    });
+}
 
 // Fetch GitHub Stars with caching and rate-limit fallback
 const starCountEl = document.getElementById('github-star-count');

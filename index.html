@@ -18,14 +18,14 @@
     <meta property="og:url" content="https://hexprite.com/">
     <meta property="og:title" content="Hexprite - Pixel Art Editor for Embedded Displays">
     <meta property="og:description" content="A native pixel art and font editor for embedded displays with 1-bit editing, live hardware streaming, and direct C-array source linking.">
-    <meta property="og:image" content="assets/images/hero_screenshot.png">
+    <meta property="og:image" content="https://hexprite.com/assets/images/hero_screenshot.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://hexprite.com/">
     <meta name="twitter:title" content="Hexprite - Pixel Art Editor for Embedded Displays">
     <meta name="twitter:description" content="A native pixel art and font editor for embedded displays with 1-bit editing, live hardware streaming, and direct C-array source linking.">
-    <meta name="twitter:image" content="assets/images/hero_screenshot.png">
+    <meta name="twitter:image" content="https://hexprite.com/assets/images/hero_screenshot.png">
 
     <!-- Preload LCP Hero Image -->
     <link rel="preload" as="image" href="assets/images/hero_screenshot.webp" type="image/webp" fetchpriority="high">
@@ -200,7 +200,7 @@
                                 fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <button id="mobile-menu-btn" type="button" aria-label="Toggle navigation menu"
+                    <button id="mobile-menu-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu"
                         class="w-[36px] h-[36px] flex items-center justify-center border-2 border-gray-900 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -1153,8 +1153,10 @@
     <!-- UI Interactions Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Helper to calculate scrollbar width to prevent layout shift
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            // Helper to calculate scrollbar width dynamically to prevent layout shift
+            function getScrollbarWidth() {
+                return window.innerWidth - document.documentElement.clientWidth;
+            }
             const mainNav = document.getElementById('main-nav');
 
             // --- Sticky Banner Logic ---
@@ -1184,6 +1186,7 @@
             
             function openModal(e) {
                 if (e) e.preventDefault();
+                const scrollbarWidth = getScrollbarWidth();
                 modal.classList.remove('hidden');
                 // Small delay to allow display block to apply before animating opacity
                 setTimeout(() => {
@@ -1273,6 +1276,7 @@
                 // Reset and play video
                 videoPlayer.currentTime = 0;
                 videoPlayer.play();
+                const scrollbarWidth = getScrollbarWidth();
                 document.body.style.paddingRight = `${scrollbarWidth}px`;
                 if (mainNav) {
                     mainNav.style.paddingRight = `${scrollbarWidth}px`;
