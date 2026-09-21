@@ -5,13 +5,13 @@ const repoRoot = path.resolve(__dirname, "..");
 const cacheFile = path.join(repoRoot, "data", "release.json");
 
 const FALLBACK_RELEASE = {
-    tag_name: "v0.2.1-beta",
-    version: "0.2.1-beta",
-    name: "Hexprite v0.2.1-beta",
+    tag_name: "v0.3.0-beta",
+    version: "0.3.0-beta",
+    name: "Hexprite v0.3.0-beta",
     prerelease: true,
-    download_url: "https://github.com/showmik/hexprite/releases/download/v0.2.1-beta/Hexprite-Setup-0.2.1-beta-x64.exe",
-    release_url: "https://github.com/showmik/hexprite/releases/tag/v0.2.1-beta",
-    published_at: "2026-09-20T18:31:19Z",
+    download_url: "https://github.com/showmik/hexprite/releases/download/v0.3.0-beta/Hexprite-Setup-0.3.0-beta-x64.exe",
+    release_url: "https://github.com/showmik/hexprite/releases/tag/v0.3.0-beta",
+    published_at: "2026-09-21T00:00:00Z",
     updated_at: new Date().toISOString(),
 };
 

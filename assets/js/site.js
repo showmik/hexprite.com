@@ -142,9 +142,6 @@ fetchStars().then(stars => {
 
 // --- Dynamic Release & Version Sync ---
 (function() {
-    const versionBadges = document.querySelectorAll('.version-badge');
-    const directDownloadLink = document.getElementById('direct-download-link');
-
     // SemVer comparison: returns > 0 if a > b, < 0 if a < b, 0 if equal
     function compareSemver(a, b) {
         if (!a && !b) return 0;
@@ -167,22 +164,36 @@ fetchStars().then(stars => {
     }
 
     const updateDOMRelease = (tag, downloadUrl) => {
-        if (tag) {
-            const displayTag = tag.startsWith('v') ? tag : 'v' + tag;
-            versionBadges.forEach(el => {
+        const displayTag = tag ? (tag.startsWith('v') ? tag : 'v' + tag) : '';
+        if (displayTag) {
+            document.querySelectorAll('.version-badge').forEach(el => {
                 el.innerText = displayTag;
             });
-            if (directDownloadLink) {
-                directDownloadLink.setAttribute('data-umami-event-version', displayTag);
-            }
         }
-        if (downloadUrl && directDownloadLink) {
-            directDownloadLink.setAttribute('href', downloadUrl);
+        const directLink = document.getElementById('direct-download-link');
+        if (directLink) {
+            if (displayTag) directLink.setAttribute('data-umami-event-version', displayTag);
+            if (downloadUrl) directLink.setAttribute('href', downloadUrl);
         }
+        // Expose globally so modals or other scripts can always access the latest release
+        window.__hexprite_release = {
+            tag_name: displayTag || tag,
+            download_url: downloadUrl
+        };
     };
 
+    // If DOM is still loading when script executes, re-apply once DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.__hexprite_release) {
+                updateDOMRelease(window.__hexprite_release.tag_name, window.__hexprite_release.download_url);
+            }
+        });
+    }
+
     // Track highest version seen so far (start with what is already rendered in the HTML)
-    let currentVersion = versionBadges[0] ? versionBadges[0].innerText.trim() : '';
+    const initialBadge = document.querySelector('.version-badge');
+    let currentVersion = initialBadge ? initialBadge.innerText.trim() : '';
 
     // 1. Stale-While-Revalidate: Check localStorage cached release
     let shouldSkipNetwork = false;

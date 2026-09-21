@@ -479,7 +479,6 @@
     </section>
 
                     <!-- include:partials/footer.html -->
-    <script src="./assets/js/site.js"></script>
 
     <!-- Interactive Game of Life Background -->
     <script>
@@ -879,6 +878,20 @@
             
             function openModal(e) {
                 if (e) e.preventDefault();
+                // Ensure download link is up-to-date from latest resolved release
+                const directLink = document.getElementById('direct-download-link');
+                if (directLink) {
+                    if (window.__hexprite_release && window.__hexprite_release.download_url) {
+                        directLink.setAttribute('href', window.__hexprite_release.download_url);
+                        directLink.setAttribute('data-umami-event-version', window.__hexprite_release.tag_name);
+                    } else {
+                        try {
+                            const cached = JSON.parse(localStorage.getItem('hexprite-cached-release') || '{}');
+                            if (cached.download_url) directLink.setAttribute('href', cached.download_url);
+                            if (cached.tag_name) directLink.setAttribute('data-umami-event-version', cached.tag_name);
+                        } catch (err) {}
+                    }
+                }
                 const scrollbarWidth = getScrollbarWidth();
                 modal.classList.remove('hidden');
                 // Small delay to allow display block to apply before animating opacity
@@ -1010,6 +1023,7 @@
             });
         });
     </script>
+    <script src="./assets/js/site.js" defer></script>
 </body>
 
 </html>

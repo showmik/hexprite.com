@@ -125,7 +125,7 @@
                     <img src="assets/images/logo.png" alt="Hexprite" width="140" height="32" class="h-7 md:h-8 w-auto dark:hidden" />
                     <img src="assets/images/logo_light.png" alt="Hexprite" width="140" height="32" class="h-7 md:h-8 w-auto hidden dark:block" />
                     <span
-                        class="version-badge px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.2.1-beta</span>
+                        class="version-badge px-2 py-0.5 text-xs font-mono font-bold bg-brandButton text-gray-900 border-2 border-brandDark dark:border-brandButton shadow-[2px_2px_0px_0px_rgba(34,33,44,1)] dark:shadow-none">v0.3.0-beta</span>
                 </a>
 
                 <!-- Desktop Menu -->
@@ -786,7 +786,6 @@
         </div>
     </footer>
 
-    <script src="./assets/js/site.js"></script>
 
     <!-- Interactive Game of Life Background -->
     <script>
@@ -1117,9 +1116,9 @@
                 
                 <!-- Skip Link -->
                 <a id="direct-download-link"
-                    href="https://github.com/showmik/hexprite/releases/download/v0.2.1-beta/Hexprite-Setup-0.2.1-beta-x64.exe"
+                    href="https://github.com/showmik/hexprite/releases/download/v0.3.0-beta/Hexprite-Setup-0.3.0-beta-x64.exe"
                     data-umami-event="download-binary"
-                    data-umami-event-version="v0.2.1-beta"
+                    data-umami-event-version="v0.3.0-beta"
                     class="text-sm font-mono text-gray-500 hover:text-brand transition-colors underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700 hover:decoration-brand">
                     No thanks, just take me to the download.
                 </a>
@@ -1186,6 +1185,20 @@
             
             function openModal(e) {
                 if (e) e.preventDefault();
+                // Ensure download link is up-to-date from latest resolved release
+                const directLink = document.getElementById('direct-download-link');
+                if (directLink) {
+                    if (window.__hexprite_release && window.__hexprite_release.download_url) {
+                        directLink.setAttribute('href', window.__hexprite_release.download_url);
+                        directLink.setAttribute('data-umami-event-version', window.__hexprite_release.tag_name);
+                    } else {
+                        try {
+                            const cached = JSON.parse(localStorage.getItem('hexprite-cached-release') || '{}');
+                            if (cached.download_url) directLink.setAttribute('href', cached.download_url);
+                            if (cached.tag_name) directLink.setAttribute('data-umami-event-version', cached.tag_name);
+                        } catch (err) {}
+                    }
+                }
                 const scrollbarWidth = getScrollbarWidth();
                 modal.classList.remove('hidden');
                 // Small delay to allow display block to apply before animating opacity
@@ -1317,6 +1330,7 @@
             });
         });
     </script>
+    <script src="./assets/js/site.js" defer></script>
 </body>
 
 </html>
