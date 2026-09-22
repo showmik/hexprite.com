@@ -573,7 +573,7 @@
 
         <div class="grid lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
             
-            <!-- Phase 1: 1-Bit Monochrome (Active Focus) -->
+            <!-- Phase 1: 1-Bit & Typography (Active Focus) -->
             <div class="bg-brand/5 dark:bg-[#192433] border-4 border-brand p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(26,143,227,1)] dark:shadow-[6px_6px_0px_0px_rgba(26,143,227,0.4)] flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between gap-2 mb-4">
@@ -582,19 +582,19 @@
                         </span>
                         <span class="font-mono text-xs text-brand font-bold tracking-wider">PHASE 01</span>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold font-mono text-gray-900 dark:text-white mb-1">1-Bit Monochrome</h3>
-                    <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">Core Engine & Beta Testing</p>
+                    <h3 class="text-xl md:text-2xl font-bold font-mono text-gray-900 dark:text-white mb-1">1-Bit & Typography</h3>
+                    <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">Core Engine & v1.0 Foundation</p>
                     <ul class="space-y-3.5 text-sm text-gray-700 dark:text-gray-300">
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
                             <span><strong>Strict 1-Bit Engine:</strong> Pixel art, layers, and 6+ dithering algorithms for OLED & e-Paper.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Live Hardware Preview:</strong> Real-time USB/Serial streaming directly to physical displays.</span></li>
+                            <span><strong>Embedded Font Studio:</strong> Glyph editor with TTF/BMFont import and Adafruit/u8g2/LVGL export.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Direct Code Generation:</strong> C/C++ arrays for Adafruit GFX, u8g2, and MicroPython.</span></li>
+                            <span><strong>Live Hardware Preview:</strong> Real-time USB/Serial streaming with one-click baud auto-detect.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Native Flipper Zero:</strong> Read, edit, and export native <code>.bm</code> and <code>.xbm</code> formats.</span></li>
+                            <span><strong>Direct Code Generation:</strong> C/C++ arrays for Adafruit GFX, u8g2, LiquidCrystal, and MicroPython.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Hardware Refinement:</strong> Real-world testing across ESP32, STM32, Pico, and Arduino.</span></li>
+                            <span><strong>Multi-Color E-Paper & Tilesets:</strong> 2-bit planes (B/W/Red) and tilemap studio for retro games.</span></li>
                     </ul>
                 </div>
                 <div class="mt-6 flex items-center justify-between text-xs font-mono text-brand">
@@ -603,7 +603,7 @@
                 </div>
             </div>
 
-            <!-- Phase 2: Keyframe Motion & Curves (Planned Next) -->
+            <!-- Phase 2: Motion & Developer Workflow (Planned Next) -->
             <div class="bg-[#fdfdfd] dark:bg-darkPanel border-4 border-gray-900 dark:border-gray-700 p-6 md:p-8 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between gap-2 mb-4">
@@ -612,24 +612,24 @@
                         </span>
                         <span class="font-mono text-xs text-gray-400 dark:text-gray-500 font-semibold tracking-wider">PHASE 02</span>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold font-mono text-gray-900 dark:text-white mb-1">Keyframe Motion & Curves</h3>
-                    <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">Motion Graphics Engine</p>
+                    <h3 class="text-xl md:text-2xl font-bold font-mono text-gray-900 dark:text-white mb-1">Motion & Tooling</h3>
+                    <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">Motion Graphics & Pipeline</p>
                     <ul class="space-y-3.5 text-sm text-gray-700 dark:text-gray-300">
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Keyframe Timeline:</strong> Animate transform properties (X/Y position, rotation, scale, opacity) per layer.</span></li>
+                            <span><strong>Keyframe Timeline & Curves:</strong> Animate transform properties with visual Bezier easing curves.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Graph Curve Editor:</strong> Visual Bezier easing curves (ease-in, ease-out, bounce) for natural motion.</span></li>
+                            <span><strong>Dual-Mode Tweening:</strong> Pre-baked frame sequences for 8-bit MCUs + C runtime for 32-bit chips.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Automated Tweening:</strong> High frame-rate interpolation without drawing every frame manually.</span></li>
+                            <span><strong>Headless Build CLI:</strong> Compile <code>.hexp</code> and <code>.hexfont</code> assets in PlatformIO & CMake CI/CD.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>MCU Runtime Library:</strong> Compact, zero-alloc C playback library that calculates tweens on-chip.</span></li>
+                            <span><strong>IDE Integration:</strong> VS Code & PlatformIO context menus to open C-arrays directly in Hexprite.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Live Motion Streaming:</strong> Preview tweened animations directly on connected hardware over USB/Serial.</span></li>
+                            <span><strong>Cross-Platform Port:</strong> Linux and macOS desktop support via modern cross-platform UI.</span></li>
                     </ul>
                 </div>
                 <div class="mt-6 flex items-center justify-between text-xs font-mono text-gray-500 dark:text-gray-400">
                     <span>Target:</span>
-                    <span class="font-bold text-gray-900 dark:text-white">v1.1.0 (Planned Next)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">v1.1.0 → v1.5.0</span>
                 </div>
             </div>
 
@@ -646,15 +646,15 @@
                     <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">TFT & Full-Color Era</p>
                     <ul class="space-y-3.5 text-sm text-gray-700 dark:text-gray-300">
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Popular TFT Display Support:</strong> Native profiles for ST7789, ILI9341, GC9A01, and color e-paper.</span></li>
+                            <span><strong>Popular TFT Display Support:</strong> Native profiles for ST7789, ILI9341, GC9A01 round dials, and TFTs.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Hardware Palettes:</strong> 16-color & 256-color indexed modes with hardware-constrained quantization.</span></li>
+                            <span><strong>Multi-Depth Color Canvas:</strong> Seamless switching between 1-bit, 2/4-bit grayscale, and 16-bit color.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Hardware Palettes:</strong> 16 & 256-color indexed modes with hardware-constrained quantization.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
                             <span><strong>LVGL True-Color Export:</strong> Direct code generation for LVGL v8/v9 color UI components.</span></li>
                         <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Flash Asset Packaging:</strong> Pack sprites into binary bundles for SPI Flash and SD cards.</span></li>
-                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
-                            <span><strong>Multi-Depth Color Canvas:</strong> Seamless switching between 1-bit, grayscale, and 16-bit color.</span></li>
+                            <span><strong>SPI Flash Asset Packaging:</strong> Pack frames into binary bundles for external Flash (W25Q) & SD cards.</span></li>
                     </ul>
                 </div>
                 <div class="mt-6 flex items-center justify-between text-xs font-mono text-gray-500 dark:text-gray-400">
