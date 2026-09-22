@@ -351,67 +351,115 @@
         </div>
     </section>
 
-    <!-- Roadmap & Pricing Focus -->
-    <section id="pricing" class="py-16 md:py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-10 md:mb-12 text-center">
-            <h2
-                class="text-3xl font-extrabold mb-4 text-gray-900 dark:text-white inline-block border-b-4 border-brand pb-2">
-                Roadmap & Tiers</h2>
-            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mt-4 px-2">Current availability and future roadmap.</p>
+    <!-- Development Roadmap -->
+    <section id="roadmap" class="py-16 md:py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <!-- Backwards-compatible anchor for legacy #pricing links -->
+        <span id="pricing" class="absolute -top-20"></span>
+
+        <div class="mb-12 md:mb-16 text-center">
+            <h2 class="text-3xl font-extrabold mb-4 text-gray-900 dark:text-white inline-block border-b-4 border-brand pb-2">
+                Development Roadmap
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mt-4 px-2 max-w-2xl mx-auto">
+                Where Hexprite is today, and where it's heading next. Built in the open for embedded software engineers and makers.
+            </p>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Free Tier - Beta / Early Access -->
-            <div
-                class="bg-[#fdfdfd] dark:bg-darkPanel border-4 border-gray-900 dark:border-gray-700 p-6 md:p-8 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none flex flex-col">
-                <div
-                    class="inline-block bg-brandButton text-gray-900 font-mono text-[10px] md:text-xs font-bold px-2 py-1 mb-4 w-max border border-gray-900">
-                    BETA / EARLY ACCESS</div>
-                <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">Monochrome Mode</h3>
-                <div class="font-mono text-2xl md:text-3xl font-extrabold text-brand mb-6">FREE</div>
-                <ul class="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 dark:text-gray-400 flex-grow">
-                    <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Full 1-Bit Graphics Editor:</strong> Drawing, layers, and animation tools tailored for embedded displays.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Image & Animated GIF Import/Export:</strong> Convert media to 1-bit using 6+ dithering algorithms and advanced filters.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Extensive Code Generation:</strong> Export straight to C, C++, and MicroPython for Adafruit GFX, u8g2, and more.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Live Hardware Preview & Streaming:</strong> Real-time USB/Serial streaming and built-in OLED/LCD/e-Paper simulation.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Two-Way Source File Synchronization:</strong> Automatically update arrays directly in your source files without copy-pasting..</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Integrated RLE & LZSS Compression:</strong> Save flash memory with native RLE and LZSS compression algorithms.</span></li>
-					<li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Native Flipper Zero Support:</strong> Natively import and export .bm and .xbm graphics for Flipper firmware.</span></li>
-					<li class="flex gap-2 items-start"><span class="text-gray-900 dark:text-brand font-bold mt-0.5">✓</span>
-                        <span><strong>Embedded Typography Suite:</strong> Create or import custom bitmapped fonts for Adafruit GFX, u8g2, and LVGL.</span></li>
-                </ul>
+        <div class="grid lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+            
+            <!-- Phase 1: 1-Bit & Typography (Active Focus) -->
+            <div class="bg-brand/5 dark:bg-[#192433] border-4 border-brand p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(26,143,227,1)] dark:shadow-[6px_6px_0px_0px_rgba(26,143,227,0.4)] flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-4">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand text-white font-mono text-xs font-bold border-2 border-gray-900 dark:border-white shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
+                            ⚡ IN DEVELOPMENT
+                        </span>
+                        <span class="font-mono text-xs text-brand font-bold tracking-wider">PHASE 01</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold font-mono text-gray-900 dark:text-white mb-1">1-Bit & Typography</h3>
+                    <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">Core Engine & v1.0 Foundation</p>
+                    <ul class="space-y-3.5 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Strict 1-Bit Engine:</strong> Pixel art, layers, and 6+ dithering algorithms for OLED & e-Paper.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Embedded Font Studio:</strong> Glyph editor with TTF/BMFont import and Adafruit/u8g2/LVGL export.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Live Hardware Preview:</strong> Real-time USB/Serial streaming with one-click baud auto-detect.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Direct Code Generation:</strong> C/C++ arrays for Adafruit GFX, u8g2, LiquidCrystal, and MicroPython.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Multi-Color E-Paper & Tilesets:</strong> 2-bit planes (B/W/Red) and tilemap studio for retro games.</span></li>
+                    </ul>
+                </div>
+                <div class="mt-6 flex items-center justify-between text-xs font-mono text-brand">
+                    <span>Target:</span>
+                    <span class="font-bold">v0.3.x Beta → v1.0 Stable</span>
+                </div>
             </div>
 
-            <!-- Pro Tier - Future Roadmap -->
-            <div
-                class="bg-gray-50 dark:bg-[#1a1a24] border-4 border-brandRed p-6 md:p-8 shadow-[4px_4px_0px_0px_rgba(255,89,90,1)] dark:shadow-none flex flex-col relative overflow-hidden">
-                <div
-                    class="inline-block bg-brandRed text-white font-mono text-[10px] md:text-xs font-bold px-2 py-1 mb-4 w-max">
-                    FUTURE ROADMAP</div>
-                <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">RGB565 Mode</h3>
-                <div class="font-mono text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6">Planned Release</div>
-                <ul class="space-y-3 md:space-y-4 text-sm md:text-base text-gray-600 dark:text-gray-400 flex-grow">
-                    <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span><strong>Color TFT Support:</strong> Planned for ST7735, ILI9341, GC9A01, and color e-paper.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span><strong>Advanced Palettes:</strong> Indexed color, RGB565, and up to 32-bit color modes.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span><strong>Asset Packing:</strong> Generate binary asset bundles for SPI Flash / SD cards.</span></li>
-                    <li class="flex gap-2 items-start"><span class="text-brandRed font-bold mt-0.5">✦</span>
-                        <span>Will be developed in the future following the monochrome edition.</span></li>
-                </ul>
+            <!-- Phase 2: Motion & Developer Workflow (Planned Next) -->
+            <div class="bg-[#fdfdfd] dark:bg-darkPanel border-4 border-gray-900 dark:border-gray-700 p-6 md:p-8 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-4">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-xs font-bold border-2 border-gray-900 dark:border-gray-400">
+                            ○ PLANNED
+                        </span>
+                        <span class="font-mono text-xs text-gray-400 dark:text-gray-500 font-semibold tracking-wider">PHASE 02</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold font-mono text-gray-900 dark:text-white mb-1">Motion & Tooling</h3>
+                    <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">Motion Graphics & Pipeline</p>
+                    <ul class="space-y-3.5 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Keyframe Timeline & Curves:</strong> Animate transform properties with visual Bezier easing curves.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Dual-Mode Tweening:</strong> Pre-baked frame sequences for 8-bit MCUs + C runtime for 32-bit chips.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Headless Build CLI:</strong> Compile <code>.hexp</code> and <code>.hexfont</code> assets in PlatformIO & CMake CI/CD.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>IDE Integration:</strong> VS Code & PlatformIO context menus to open C-arrays directly in Hexprite.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Cross-Platform Port:</strong> Linux and macOS desktop support via modern cross-platform UI.</span></li>
+                    </ul>
+                </div>
+                <div class="mt-6 flex items-center justify-between text-xs font-mono text-gray-500 dark:text-gray-400">
+                    <span>Target:</span>
+                    <span class="font-bold text-gray-900 dark:text-white">v1.1.0 → v1.5.0</span>
+                </div>
             </div>
+
+            <!-- Phase 3: Color Displays & TFT (Future Release) -->
+            <div class="bg-[#fdfdfd] dark:bg-darkPanel border-4 border-gray-900 dark:border-gray-700 p-6 md:p-8 shadow-[4px_4px_0px_0px_rgba(17,24,39,1)] md:shadow-indie-light dark:shadow-none flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-4">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-xs font-bold border-2 border-gray-900 dark:border-gray-400">
+                            ○ PLANNED
+                        </span>
+                        <span class="font-mono text-xs text-gray-400 dark:text-gray-500 font-semibold tracking-wider">PHASE 03</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold font-mono text-gray-900 dark:text-white mb-1">Color Displays (RGB565)</h3>
+                    <p class="text-xs font-mono text-brand mb-6 uppercase tracking-wider font-semibold">TFT & Full-Color Era</p>
+                    <ul class="space-y-3.5 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Popular TFT Display Support:</strong> Native profiles for ST7789, ILI9341, GC9A01 round dials, and TFTs.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Multi-Depth Color Canvas:</strong> Seamless switching between 1-bit, 2/4-bit grayscale, and 16-bit color.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>Hardware Palettes:</strong> 16 & 256-color indexed modes with hardware-constrained quantization.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>LVGL True-Color Export:</strong> Direct code generation for LVGL v8/v9 color UI components.</span></li>
+                        <li class="flex gap-2 items-start"><span class="text-brand font-bold">■</span>
+                            <span><strong>SPI Flash Asset Packaging:</strong> Pack frames into binary bundles for external Flash (W25Q) & SD cards.</span></li>
+                    </ul>
+                </div>
+                <div class="mt-6 flex items-center justify-between text-xs font-mono text-gray-500 dark:text-gray-400">
+                    <span>Target:</span>
+                    <span class="font-bold text-gray-900 dark:text-white">v2.0.0 (Future Release)</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Support Section -->
     <!-- Support Section -->
     <section id="support" class="py-16 md:py-24 bg-brandDark text-white border-t-2 border-brandDark">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -421,40 +469,9 @@
                   <path d="M2,2 h2 v1 h-2 v-1 z M7,2 h2 v1 h-2 v-1 z M1,3 h9 v3 h-9 v-3 z M2,6 h7 v1 h-7 v-1 z M3,7 h5 v1 h-5 v-1 z M4,8 h3 v1 h-3 v-1 z M5,9 h1 v1 h-1 v-1 z"/>
                 </svg>
             </h2>
-            <div class="max-w-2xl mx-auto text-base text-gray-400 leading-relaxed space-y-4 md:space-y-6 text-left sm:text-center px-2">
-                <p class="text-lg text-gray-300">
-                    Built to eliminate friction in embedded graphics. Hexprite replaces fragmented tools and web converters with one unified, native workflow.
-                </p>
-                <div class="bg-[#1a1a24] border border-gray-800 md:flex items-stretch text-left overflow-hidden mt-10 rounded-sm shadow-md">
-                    <!-- Left: The Story & Progress -->
-                    <div class="p-6 md:p-8 md:w-2/3 border-b md:border-b-0 md:border-r border-gray-800 flex flex-col justify-center bg-[#1a1a24]">
-                        <div class="flex items-center gap-3 mb-4">
-                            <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="text-white font-bold font-mono text-lg md:text-xl tracking-tight">Open Source Goal</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
-                            As a solo developer, I'm committed to keeping the core monochrome features entirely free. If this tool saves you time, consider a donation. <strong class="text-gray-200">Once we reach $500, I will release the Hexprite Monochrome edition as open-source software.</strong>
-                        </p>
-                        
-                        <!-- Progress Bar -->
-                        <div class="w-full bg-gray-800/80 h-2 rounded-full overflow-hidden mb-2">
-                            <div class="bg-brand h-full transition-all duration-500 ease-out" style="width: 0%"></div>
-                        </div>
-                        <div class="flex justify-between text-xs font-mono text-gray-500 uppercase tracking-widest">
-                            <span>$0 Raised</span>
-                            <span>$500 Goal</span>
-                        </div>
-                    </div>
-
-                    <!-- Right: The Target -->
-                    <div class="p-6 md:p-8 md:w-1/3 flex flex-col items-center justify-center bg-[#111118] relative">
-                        <div class="font-mono text-4xl md:text-5xl font-extrabold text-brand mb-3 tracking-tighter">$500</div>
-                        <div class="text-[10px] md:text-xs text-gray-500 font-mono uppercase tracking-widest text-center font-semibold">Target Goal</div>
-                    </div>
-                </div>
-            </div>
+            <p class="max-w-2xl mx-auto text-base md:text-lg text-gray-300 leading-relaxed text-center px-2">
+                Hexprite is 100% free and open-source software under the <strong>GNU GPLv3</strong>. If it saves you time or helps bring your hardware projects to life, please consider supporting ongoing development on Patreon or starring the project on GitHub.
+            </p>
 
             <div class="mt-10 md:mt-12 flex flex-col sm:flex-row justify-center gap-4 md:gap-6 px-4">
                 <a href="https://www.patreon.com/hexprite" target="_blank" rel="noopener noreferrer"
@@ -734,8 +751,8 @@
             </div>
             
             <div class="font-mono flex flex-col flex-1">
-                <span class="text-sm font-bold text-white">Help open-source Hexprite!</span>
-                <span class="text-xs text-gray-400 mt-0.5"><span class="text-brand">$0</span> / $500 Raised</span>
+                <span class="text-sm font-bold text-white">Support Hexprite Development</span>
+                <span class="text-xs text-gray-400 mt-0.5">Free & open source for makers and embedded engineers</span>
             </div>
             
             <!-- Mobile dismiss -->
@@ -745,16 +762,11 @@
         </div>
         
         <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-            <!-- Progress Bar (Subtle) -->
-            <div class="hidden md:block w-32 bg-gray-800 h-1.5 rounded-full overflow-hidden border border-gray-700">
-                <div class="bg-brand h-full transition-all" style="width: 5%"></div>
-            </div>
-            
             <a href="#support"
                 data-umami-event="support-click"
                 data-umami-event-location="sticky-banner"
                 class="bg-brandButton text-gray-900 px-5 py-2 font-mono text-sm font-bold border-2 border-brandDark hover:bg-[#FFEA00] hover:translate-x-[1px] hover:translate-y-[1px] transition-all whitespace-nowrap shadow-[2px_2px_0px_0px_rgba(17,24,39,1)] hover:shadow-none">
-                ♥ Donate
+                ♥ Support
             </a>
             
             <!-- Desktop dismiss -->
@@ -791,7 +803,7 @@
                 
                 <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Support the Project</h4>
                 <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
-                    Hexprite is completely free, but your support helps us reach our <strong class="text-gray-900 dark:text-gray-200">$500 goal</strong> to make the monochrome edition Open Source!
+                    Hexprite is completely free and open source. Your support on Patreon helps keep the project actively maintained and growing!
                 </p>
                 
                 <!-- Patreon CTA -->

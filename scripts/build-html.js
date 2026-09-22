@@ -67,91 +67,131 @@ function licenseToHtml() {
     const raw = fs.readFileSync(path.join(repoRoot, 'LICENSE'), 'utf8');
     const lines = raw.split(/\r?\n/);
     const html = [];
-    const sectionHeadingRe = /^(\d+)\.\s+(.+)$/;
+
+    const numberedSectionRe = /^\s*(\d+)\.\s+(.+)$/;
+    const majorHeadingRe = /^\s*(Preamble|TERMS AND CONDITIONS|How to Apply These Terms to Your New Programs)\s*$/;
+    const endTermsRe = /^\s*END OF TERMS AND CONDITIONS\s*$/;
+    const bulletRe = /^\s*([a-z]\))\s+(.+)$/;
+    const starBulletRe = /^\s*\*\s+(.+)$/;
 
     let i = 0;
 
-    // Line 1: title — rendered by the <h1> in the template, skip it
-    i++;
+    // Skip the first title line (GNU GENERAL PUBLIC LICENSE) since it's rendered by the <h1> in the template
+    while (i < lines.length && !lines[i].includes('GNU GENERAL PUBLIC LICENSE')) i++;
+    if (i < lines.length) i++; // skip GNU GENERAL PUBLIC LICENSE
 
-    // Skip blank lines after title
-    while (i < lines.length && lines[i].trim() === '') i++;
+    let currentPara = [];
+    let currentBullets = [];
+    let inPre = false;
+    let preLines = [];
 
-    // Preamble paragraphs (copyright, intro) — collect until first numbered section
-    let paraLines = [];
-    while (i < lines.length && !sectionHeadingRe.test(lines[i])) {
-        if (lines[i].trim() === '') {
-            if (paraLines.length) {
-                html.push(`            <p>${paraLines.join(' ')}</p>`);
-                paraLines = [];
-            }
-        } else {
-            paraLines.push(lines[i].trim());
+    function flushPara() {
+        if (currentPara.length) {
+            html.push(`            <p>${currentPara.join(' ')}</p>`);
+            currentPara = [];
         }
+    }
+
+    function flushBullets() {
+        if (currentBullets.length) {
+            html.push(`            <ul class="list-disc pl-5 mt-2 space-y-2">`);
+            for (const b of currentBullets) {
+                html.push(`                <li>${b}</li>`);
+            }
+            html.push(`            </ul>`);
+            currentBullets = [];
+        }
+    }
+
+    function flushPre() {
+        if (preLines.length) {
+            html.push(`            <pre class="bg-gray-100 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 p-4 font-mono text-xs overflow-x-auto my-4 text-gray-800 dark:text-gray-200 rounded">${preLines.join('\n')}</pre>`);
+            preLines = [];
+            inPre = false;
+        }
+    }
+
+    function flushAll() {
+        flushBullets();
+        flushPara();
+        flushPre();
+    }
+
+    while (i < lines.length) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        if (endTermsRe.test(line)) {
+            flushAll();
+            html.push(`            <hr class="my-8 border-gray-200 dark:border-gray-700" />`);
+            i++;
+            continue;
+        }
+
+        const majorMatch = line.match(majorHeadingRe);
+        if (majorMatch) {
+            flushAll();
+            html.push(`            <h2 class="text-xl font-bold font-mono text-gray-900 dark:text-white mt-8 mb-3">${majorMatch[1]}</h2>`);
+            i++;
+            continue;
+        }
+
+        const numberedMatch = line.match(numberedSectionRe);
+        if (numberedMatch) {
+            flushAll();
+            html.push(`            <h2 class="text-xl font-bold font-mono text-gray-900 dark:text-white mt-8 mb-3">${numberedMatch[1]}. ${numberedMatch[2]}</h2>`);
+            i++;
+            continue;
+        }
+
+        const bulletMatch = line.match(bulletRe) || line.match(starBulletRe);
+        if (bulletMatch) {
+            flushPara();
+            flushPre();
+            currentBullets.push(bulletMatch[2] ? `${bulletMatch[1]} ${bulletMatch[2]}` : bulletMatch[1]);
+            i++;
+            continue;
+        }
+
+        // Bullet continuation line
+        if (currentBullets.length > 0 && line.startsWith('    ') && trimmed !== '' && !line.startsWith('        ')) {
+            currentBullets[currentBullets.length - 1] += ' ' + trimmed;
+            i++;
+            continue;
+        }
+
+        // Check for code / notice blocks (indented 4 spaces after "How to Apply")
+        if (trimmed !== '' && line.startsWith('    ') && (trimmed.startsWith('Hexprite') || trimmed.startsWith('Copyright') || trimmed.startsWith('This program') || trimmed.startsWith('<one line') || trimmed.startsWith('<https:'))) {
+            flushPara();
+            flushBullets();
+            inPre = true;
+            preLines.push(trimmed);
+            i++;
+            continue;
+        }
+
+        if (inPre && line.startsWith('    ') && trimmed !== '') {
+            preLines.push(trimmed);
+            i++;
+            continue;
+        } else if (inPre && trimmed === '') {
+            flushPre();
+        }
+
+        if (trimmed === '') {
+            flushBullets();
+            flushPara();
+            flushPre();
+        } else {
+            flushBullets();
+            flushPre();
+            currentPara.push(trimmed);
+        }
+
         i++;
     }
-    if (paraLines.length) {
-        html.push(`            <p>${paraLines.join(' ')}</p>`);
-        paraLines = [];
-    }
 
-    // Numbered sections
-    while (i < lines.length) {
-        const headingMatch = lines[i].match(sectionHeadingRe);
-        if (headingMatch) {
-            html.push('');
-            html.push(`            <h2 class="text-xl font-bold font-mono text-gray-900 dark:text-white mt-8">${headingMatch[1]}. ${headingMatch[2]}</h2>`);
-            i++;
-
-            let bullets = [];
-            paraLines = [];
-
-            while (i < lines.length && !sectionHeadingRe.test(lines[i])) {
-                const line = lines[i];
-
-                if (line.startsWith('* ')) {
-                    // Flush any pending paragraph
-                    if (paraLines.length) {
-                        html.push(`            <p>${paraLines.join(' ')}</p>`);
-                        paraLines = [];
-                    }
-                    bullets.push(line.slice(2).trim());
-                } else if (line.startsWith('  ') && bullets.length) {
-                    // Continuation line of the last bullet
-                    bullets[bullets.length - 1] += ' ' + line.trim();
-                } else if (line.trim() === '') {
-                    // Flush bullets
-                    if (bullets.length) {
-                        html.push(`            <ul class="list-disc pl-5 mt-2 space-y-2">`);
-                        for (const b of bullets) html.push(`                <li>${b}</li>`);
-                        html.push(`            </ul>`);
-                        bullets = [];
-                    }
-                    // Flush paragraph
-                    if (paraLines.length) {
-                        html.push(`            <p>${paraLines.join(' ')}</p>`);
-                        paraLines = [];
-                    }
-                } else {
-                    paraLines.push(line.trim());
-                }
-                i++;
-            }
-
-            // Flush any remaining content at end of section
-            if (bullets.length) {
-                html.push(`            <ul class="list-disc pl-5 mt-2 space-y-2">`);
-                for (const b of bullets) html.push(`                <li>${b}</li>`);
-                html.push(`            </ul>`);
-            }
-            if (paraLines.length) {
-                html.push(`            <p>${paraLines.join(' ')}</p>`);
-            }
-        } else {
-            i++;
-        }
-    }
-
+    flushAll();
     return html.join('\n');
 }
 
