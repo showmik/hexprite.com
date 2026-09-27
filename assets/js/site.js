@@ -316,3 +316,88 @@ fetchStars().then(stars => {
     }).catch(() => {});
 })();
 
+// --- Umami Content Engagement & Section Visibility Tracking ---
+(function() {
+    if (typeof window === 'undefined') return;
+
+    // 1. Section Visibility Tracking (Track when user dwells on a key section)
+    const trackedSections = new Set();
+    const sectionTimers = new Map();
+
+    const trackSectionView = (sectionId) => {
+        if (trackedSections.has(sectionId)) return;
+        trackedSections.add(sectionId);
+        if (window.umami) {
+            window.umami.track('section-view', { section: sectionId });
+        }
+    };
+
+    if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.id;
+                if (!id || trackedSections.has(id)) return;
+
+                if (entry.isIntersecting) {
+                    // Dwell timer: user must view for at least 1.2s to count as engaging
+                    const timer = setTimeout(() => {
+                        trackSectionView(id);
+                    }, 1200);
+                    sectionTimers.set(id, timer);
+                } else {
+                    // Cleared if user scrolled past before dwelling
+                    if (sectionTimers.has(id)) {
+                        clearTimeout(sectionTimers.get(id));
+                        sectionTimers.delete(id);
+                    }
+                }
+            });
+        }, { threshold: 0.25 });
+
+        const initSectionObserver = () => {
+            ['product', 'features', 'roadmap', 'support'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) sectionObserver.observe(el);
+            });
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSectionObserver);
+        } else {
+            initSectionObserver();
+        }
+    }
+
+    // 2. Scroll Depth Milestones (50% and 100%)
+    const trackedDepths = new Set();
+    let scrollTicking = false;
+
+    const checkScrollDepth = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const winHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        if (docHeight <= winHeight) return;
+
+        const scrollPercent = Math.round(((scrollTop + winHeight) / docHeight) * 100);
+
+        if (scrollPercent >= 50 && !trackedDepths.has('50%')) {
+            trackedDepths.add('50%');
+            if (window.umami) window.umami.track('scroll-depth', { depth: '50%' });
+        }
+        if (scrollPercent >= 95 && !trackedDepths.has('100%')) {
+            trackedDepths.add('100%');
+            if (window.umami) window.umami.track('scroll-depth', { depth: '100%' });
+        }
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(() => {
+                checkScrollDepth();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }, { passive: true });
+})();
+

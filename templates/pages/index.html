@@ -58,9 +58,10 @@
 
         <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8 px-4">
             <a id="download-btn" href="{{DOWNLOAD_EXE_URL}}"
-                data-umami-event="download-binary"
+                data-umami-event="download"
                 data-umami-event-location="hero"
                 data-umami-event-version="{{VERSION_TAG}}"
+                data-umami-event-type="installer-exe"
                 class="download-trigger inline-flex justify-center items-center px-8 py-4 border-2 border-brandDark bg-brandButton text-gray-900 font-mono font-bold text-lg hover:translate-y-[2px] hover:translate-x-[2px] shadow-indie-light hover:shadow-indie-hover-light transition-all w-full sm:w-auto">
                 ↓ Download (.exe)
             </a>
@@ -485,7 +486,8 @@
                     Support on Patreon
                 </a>
                 <a href="https://github.com/showmik/hexprite" target="_blank" rel="noopener noreferrer"
-                    data-umami-event="github-star-click"
+                    data-umami-event="github-click"
+                    data-umami-event-action="star"
                     data-umami-event-location="support-section"
                     class="px-6 py-4 md:px-8 md:py-4 bg-gray-800 text-white font-mono font-bold text-base md:text-lg hover:bg-gray-700 border-2 border-gray-600 active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2">
                     ★ Star on GitHub
@@ -823,8 +825,10 @@
                 <!-- Skip Link -->
                 <a id="direct-download-link"
                     href="{{DOWNLOAD_EXE_URL}}"
-                    data-umami-event="download-binary"
+                    data-umami-event="download"
+                    data-umami-event-location="download-modal-skip"
                     data-umami-event-version="{{VERSION_TAG}}"
+                    data-umami-event-type="installer-exe"
                     class="text-sm font-mono text-gray-500 hover:text-brand transition-colors underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700 hover:decoration-brand">
                     No thanks, just take me to the download.
                 </a>
@@ -987,8 +991,18 @@
 
                 if (!videoFile) return;
 
+                let featureName = '';
+                const featureRow = triggerElement.closest('.flex-col.md\\:flex-row, .flex-col.md\\:flex-row-reverse') || triggerElement.parentElement?.parentElement;
+                if (featureRow) {
+                    const h3 = featureRow.querySelector('h3');
+                    if (h3) featureName = h3.innerText.replace(/^>\s*/, '').trim();
+                }
+                if (!featureName && img) {
+                    featureName = img.getAttribute('alt') || '';
+                }
+
                 if (window.umami) {
-                    window.umami.track('video-preview-play', { video: videoFile });
+                    window.umami.track('video-play', { video: videoFile, feature: featureName });
                 }
 
                 videoModal.classList.remove('hidden');
@@ -1007,6 +1021,15 @@
                 
                 // Reset and play video
                 videoPlayer.currentTime = 0;
+                let videoCompleted = false;
+                videoPlayer.ontimeupdate = () => {
+                    if (!videoCompleted && videoPlayer.duration > 0 && (videoPlayer.currentTime / videoPlayer.duration) >= 0.8) {
+                        videoCompleted = true;
+                        if (window.umami) {
+                            window.umami.track('video-complete', { video: videoFile, feature: featureName });
+                        }
+                    }
+                };
                 const playPromise = videoPlayer.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(() => {});
