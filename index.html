@@ -397,7 +397,7 @@
                         Turn mystery C-arrays back into visual art. No math, no spreadsheets—just point Hexprite at your `.h` file and watch every embedded sprite reconstruct instantly.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Scans entire `<code>.c</code>, `<code>.h</code>, or <code>.py</code> files to extract embedded sprites.</li>
+                        <li><span class="text-brand mr-2">■</span> Scans entire <code>.c</code>, <code>.h</code>, or <code>.py</code> files to extract embedded sprites.</li>
                         <li><span class="text-brand mr-2">■</span> Automatically detects variable names, dimensions, and formats.</li>
                         <li><span class="text-brand mr-2">■</span> Provides mini visual thumbnails for inspection before importing.</li>
                     </ul>
@@ -419,7 +419,7 @@
                 <div class="w-full md:w-1/2">
                     <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-mono text-gray-900 dark:text-white">> Direct Source File Syncing</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-4">
-                        Stop juggling web converters, formatting templates, and tedious copy-pasting. Hexprite links directly to your project’s <code>.c</code>, `<code>.h</code>, or <code>.py</code> files..
+                        Stop juggling web converters, formatting templates, and tedious copy-pasting. Hexprite links directly to your project’s <code>.c</code>, <code>.h</code>, or <code>.py</code> files.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
                         <li><span class="text-brand mr-2">■</span> Saves in Hexprite instantly update your source code in VS Code, CLion, or PlatformIO.</li>
@@ -472,7 +472,7 @@
                         Go beyond sprites with a dedicated, professional embedded bitmap font editor built from the ground up for microcontroller displays.
                     </p>
                     <ul class="space-y-2 font-mono text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                        <li><span class="text-brand mr-2">■</span> Go beyond sprites with a dedicated embedded bitmap font editor built for microcontroller displays.</li>
+                        <li><span class="text-brand mr-2">■</span> Design custom monospace and proportional bitmap fonts pixel-by-pixel.</li>
                         <li><span class="text-brand mr-2">■</span> Export to Adafruit GFX, u8g2, and LVGL with tight auto-cropping.</li>
                         <li><span class="text-brand mr-2">■</span> Convert TrueType, BMFont, or sprite sheets into editable monochrome pixel fonts.</li>
                     </ul>
@@ -797,7 +797,7 @@
                         <a href="privacy.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Privacy Policy</a>
                         <a href="refunds.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Refund Policy</a>
                         <a href="code-of-conduct.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Code of Conduct</a>
-                        <a href="license.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">License (EULA)</a>
+                        <a href="license.html" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">License (GPLv3)</a>
                     </div>
                 </div>
             </div>
@@ -1190,6 +1190,14 @@
                 });
             });
 
+            const bannerSupportBtn = banner ? banner.querySelector('a[href="#support"]') : null;
+            if (bannerSupportBtn) {
+                bannerSupportBtn.addEventListener('click', () => {
+                    banner.classList.add('translate-y-32', 'opacity-0');
+                    localStorage.setItem('hexprite-banner-dismissed', 'true');
+                });
+            }
+
             // --- Download Modal Logic ---
             const modal = document.getElementById('download-modal');
             const modalContent = document.getElementById('download-modal-content');
@@ -1306,7 +1314,10 @@
                 
                 // Reset and play video
                 videoPlayer.currentTime = 0;
-                videoPlayer.play();
+                const playPromise = videoPlayer.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {});
+                }
                 const scrollbarWidth = getScrollbarWidth();
                 document.body.style.paddingRight = `${scrollbarWidth}px`;
                 if (mainNav) {

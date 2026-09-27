@@ -269,7 +269,7 @@ fetchStars().then(stars => {
 
         // Tier 2: Try same-origin static release.json (no CORS, no rate limit)
         try {
-            const res = await fetch('data/release.json', fetchOptions);
+            const res = await fetch('/data/release.json', fetchOptions);
             if (res.ok) {
                 const data = await res.json();
                 if (data && data.tag_name && data.download_url) {

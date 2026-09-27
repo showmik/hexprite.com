@@ -29,7 +29,7 @@ const TOKENS = {
         NAV_ID_ATTR: '',
         NAV_TRANSITION: 'transition-colors duration-200',
         DOWNLOAD_CTA_HREF: '/#download-btn',
-        DOWNLOAD_CTA_CLASS: '',
+        DOWNLOAD_CTA_CLASS: 'download-trigger ',
         LICENSE_CONTENT: '',
         UMAMI_SCRIPT_URL,
         UMAMI_WEBSITE_ID,
