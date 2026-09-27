@@ -175,6 +175,13 @@ fetchStars().then(stars => {
             if (displayTag) directLink.setAttribute('data-umami-event-version', displayTag);
             if (downloadUrl) directLink.setAttribute('href', downloadUrl);
         }
+        // Update all direct download CTA links across hero, nav, and footer
+        if (downloadUrl) {
+            document.querySelectorAll('#download-btn, a.download-trigger').forEach(el => {
+                el.setAttribute('href', downloadUrl);
+                if (displayTag) el.setAttribute('data-umami-event-version', displayTag);
+            });
+        }
         // Expose globally so modals or other scripts can always access the latest release
         window.__hexprite_release = {
             tag_name: displayTag || tag,

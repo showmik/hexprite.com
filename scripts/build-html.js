@@ -203,6 +203,7 @@ async function build() {
         VERSION_NUM: release.version,
         DOWNLOAD_EXE_URL: release.download_url,
         RELEASE_URL: release.release_url,
+        DOWNLOAD_CTA_HREF: release.download_url,
     };
 
     Object.assign(TOKENS.home, releaseTokens);
