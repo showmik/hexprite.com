@@ -48,7 +48,53 @@
     <link rel="preconnect" href="https://cloud.umami.is">
 
     <!-- Umami Analytics -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="5f4ad7ae-d229-4674-bed2-c36a8aab6755" data-domains="hexprite.com,www.hexprite.com" data-do-not-track="true"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="5f4ad7ae-d229-4674-bed2-c36a8aab6755" data-domains="hexprite.com,www.hexprite.com"></script>
+    <script>
+        (function() {
+            var queue = [];
+            function flush() {
+                if (window.umami && typeof window.umami.track === 'function') {
+                    while (queue.length > 0) {
+                        var item = queue.shift();
+                        try { window.umami.track(item.name, item.data); } catch (e) {}
+                    }
+                }
+            }
+            window.trackUmamiEvent = function(name, data) {
+                if (window.umami && typeof window.umami.track === 'function') {
+                    try { window.umami.track(name, data); } catch (e) {}
+                } else {
+                    queue.push({ name: name, data: data });
+                }
+            };
+            var realUmami = window.umami;
+            if (!realUmami) {
+                try {
+                    Object.defineProperty(window, 'umami', {
+                        configurable: true,
+                        enumerable: true,
+                        get: function() { return realUmami; },
+                        set: function(val) { realUmami = val; flush(); }
+                    });
+                } catch (e) {}
+            } else {
+                flush();
+            }
+            var script = document.querySelector('script[data-website-id]');
+            if (script) script.addEventListener('load', flush);
+            var count = 0;
+            var interval = setInterval(function() {
+                count++;
+                if (window.umami && typeof window.umami.track === 'function') {
+                    flush();
+                    clearInterval(interval);
+                } else if (count >= 25) {
+                    clearInterval(interval);
+                    queue.length = 0;
+                }
+            }, 200);
+        })();
+    </script>
 
     <!-- Theme Initialization Script -->
     <script>
@@ -128,14 +174,23 @@
                     <!-- Links -->
                     <div class="flex items-center gap-6">
                         <a href="/#product"
+                            data-umami-event="nav-click"
+                            data-umami-event-target="product"
+                            data-umami-event-location="nav-desktop"
                             class="font-mono text-sm font-bold hover:text-brand transition-colors">Product</a>
                         <a href="/#features"
+                            data-umami-event="nav-click"
+                            data-umami-event-target="features"
+                            data-umami-event-location="nav-desktop"
                             class="font-mono text-sm font-bold hover:text-brand transition-colors">Features</a>
                         <a href="/#roadmap"
+                            data-umami-event="nav-click"
+                            data-umami-event-target="roadmap"
+                            data-umami-event-location="nav-desktop"
                             class="font-mono text-sm font-bold hover:text-brand transition-colors">Roadmap</a>
                         <a href="/#support"
                             data-umami-event="support-click"
-                            data-umami-event-location="nav"
+                            data-umami-event-location="nav-desktop"
                             class="font-mono text-sm font-bold text-brandRed hover:opacity-80 transition-opacity flex items-center gap-1">
                             ♥ Support
                         </a>
@@ -215,14 +270,23 @@
             class="hidden md:hidden bg-[#fdfdfd] dark:bg-darkBg border-b-2 border-brandDark dark:border-gray-800">
             <div class="px-4 pt-2 pb-4 space-y-1 sm:px-3 flex flex-col">
                 <a href="/#product"
+                    data-umami-event="nav-click"
+                    data-umami-event-target="product"
+                    data-umami-event-location="nav-mobile"
                     class="block px-3 py-3 font-mono text-base font-bold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 border-b border-gray-200 dark:border-gray-800">Product</a>
                 <a href="/#features"
+                    data-umami-event="nav-click"
+                    data-umami-event-target="features"
+                    data-umami-event-location="nav-mobile"
                     class="block px-3 py-3 font-mono text-base font-bold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 border-b border-gray-200 dark:border-gray-800">Features</a>
                 <a href="/#roadmap"
+                    data-umami-event="nav-click"
+                    data-umami-event-target="roadmap"
+                    data-umami-event-location="nav-mobile"
                     class="block px-3 py-3 font-mono text-base font-bold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 border-b border-gray-200 dark:border-gray-800">Roadmap</a>
                 <a href="/#support"
                     data-umami-event="support-click"
-                    data-umami-event-location="mobile-nav"
+                    data-umami-event-location="nav-mobile"
                     class="block px-3 py-3 font-mono text-base font-bold text-brandRed hover:bg-gray-100 dark:hover:bg-gray-800">♥
                     Support</a>
                 <a href="https://github.com/showmik/hexprite" target="_blank" rel="noopener noreferrer"
@@ -338,8 +402,16 @@
                             data-umami-event-version="v0.3.0-beta"
                             data-umami-event-type="installer-exe"
                             class="download-trigger text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Download</a>
-                        <a href="/#features" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Features</a>
-                        <a href="/#roadmap" class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Roadmap</a>
+                        <a href="/#features"
+                            data-umami-event="nav-click"
+                            data-umami-event-target="features"
+                            data-umami-event-location="footer"
+                            class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Features</a>
+                        <a href="/#roadmap"
+                            data-umami-event="nav-click"
+                            data-umami-event-target="roadmap"
+                            data-umami-event-location="footer"
+                            class="text-gray-900 dark:text-gray-400 hover:text-brand transition-colors">Roadmap</a>
                     </div>
                 </div>
 

@@ -1001,7 +1001,9 @@
                     featureName = img.getAttribute('alt') || '';
                 }
 
-                if (window.umami) {
+                if (window.trackUmamiEvent) {
+                    window.trackUmamiEvent('video-play', { video: videoFile, feature: featureName });
+                } else if (window.umami) {
                     window.umami.track('video-play', { video: videoFile, feature: featureName });
                 }
 
@@ -1025,7 +1027,9 @@
                 videoPlayer.ontimeupdate = () => {
                     if (!videoCompleted && videoPlayer.duration > 0 && (videoPlayer.currentTime / videoPlayer.duration) >= 0.8) {
                         videoCompleted = true;
-                        if (window.umami) {
+                        if (window.trackUmamiEvent) {
+                            window.trackUmamiEvent('video-complete', { video: videoFile, feature: featureName });
+                        } else if (window.umami) {
                             window.umami.track('video-complete', { video: videoFile, feature: featureName });
                         }
                     }

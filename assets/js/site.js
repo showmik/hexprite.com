@@ -4,6 +4,17 @@ if (typeof window !== 'undefined' && window.location && window.location.pathname
     window.history.replaceState(null, '', cleanPath);
 }
 
+// --- Analytics Event Helper ---
+const trackEvent = (name, data) => {
+    if (typeof window !== 'undefined') {
+        if (window.trackUmamiEvent) {
+            window.trackUmamiEvent(name, data);
+        } else if (window.umami && typeof window.umami.track === 'function') {
+            window.umami.track(name, data);
+        }
+    }
+};
+
 // --- Theme Toggle Logic ---
 const themeToggleBtns = [
     document.getElementById('theme-toggle'),
@@ -46,9 +57,7 @@ themeToggleBtns.forEach(btn => {
             localStorage.setItem('color-theme', 'light');
         }
 
-        if (window.umami) {
-            window.umami.track('theme-toggle', { mode: willBeDark ? 'dark' : 'light' });
-        }
+        trackEvent('theme-toggle', { mode: willBeDark ? 'dark' : 'light' });
 
         // Trigger download button pop animation
         const downloadBtn = document.getElementById('download-btn');
@@ -327,9 +336,7 @@ fetchStars().then(stars => {
     const trackSectionView = (sectionId) => {
         if (trackedSections.has(sectionId)) return;
         trackedSections.add(sectionId);
-        if (window.umami) {
-            window.umami.track('section-view', { section: sectionId });
-        }
+        trackEvent('section-view', { section: sectionId });
     };
 
     if ('IntersectionObserver' in window) {
@@ -382,11 +389,11 @@ fetchStars().then(stars => {
 
         if (scrollPercent >= 50 && !trackedDepths.has('50%')) {
             trackedDepths.add('50%');
-            if (window.umami) window.umami.track('scroll-depth', { depth: '50%' });
+            trackEvent('scroll-depth', { depth: '50%' });
         }
         if (scrollPercent >= 95 && !trackedDepths.has('100%')) {
             trackedDepths.add('100%');
-            if (window.umami) window.umami.track('scroll-depth', { depth: '100%' });
+            trackEvent('scroll-depth', { depth: '100%' });
         }
     };
 
