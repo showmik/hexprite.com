@@ -5,13 +5,13 @@ const repoRoot = path.resolve(__dirname, "..");
 const cacheFile = path.join(repoRoot, "data", "release.json");
 
 const FALLBACK_RELEASE = {
-    tag_name: "v0.3.0-beta",
-    version: "0.3.0-beta",
-    name: "Hexprite v0.3.0-beta",
+    tag_name: "v0.4.0-beta",
+    version: "0.4.0-beta",
+    name: "Hexprite v0.4.0-beta",
     prerelease: true,
-    download_url: "https://github.com/showmik/hexprite/releases/download/v0.3.0-beta/Hexprite-Setup-0.3.0-beta-x64.exe",
-    release_url: "https://github.com/showmik/hexprite/releases/tag/v0.3.0-beta",
-    published_at: "2026-09-21T00:00:00Z",
+    download_url: "https://github.com/showmik/hexprite/releases/download/v0.4.0-beta/Hexprite-Setup-0.4.0-beta-x64.exe",
+    release_url: "https://github.com/showmik/hexprite/releases/tag/v0.4.0-beta",
+    published_at: "2026-10-16T00:00:00Z",
     updated_at: new Date().toISOString(),
 };
 
@@ -187,10 +187,12 @@ async function getReleaseInfo() {
         releaseData = await fetchFromRestApi();
     }
 
-    // Strategy 3: Cached data
-    if (!releaseData) {
-        console.warn("All remote fetch methods failed. Using cached release data.");
-        releaseData = cached;
+    // Strategy 3: Cached data (never downgrade if cached or fallback is newer)
+    const bestLocal = (cached && compareSemver(cached.tag_name, FALLBACK_RELEASE.tag_name) >= 0) ? cached : FALLBACK_RELEASE;
+    if (!releaseData || compareSemver(bestLocal.tag_name, releaseData.tag_name) > 0) {
+        releaseData = bestLocal;
+        saveCachedRelease(releaseData);
+        console.log("Using newer local release: " + releaseData.tag_name + " (" + (releaseData.prerelease ? "pre-release" : "stable") + ")");
     } else {
         saveCachedRelease(releaseData);
         console.log("Successfully resolved release: " + releaseData.tag_name + " (" + (releaseData.prerelease ? "pre-release" : "stable") + ")");
